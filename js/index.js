@@ -13,6 +13,7 @@ function appendToHomepageFeed(data, page) {
   let postFeed = document.querySelector('.all-posts');
   for (post of pageOfPosts) {
     let postDisplay = document.createElement('div');
+    postDisplay.className = 'user-post'
     postDisplay.innerText = `${post.user.username}: ${post.title}`;
     postDisplay.setAttribute('data-post-id', post.id);
     postDisplay.addEventListener('click', postClick);

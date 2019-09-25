@@ -1,3 +1,20 @@
 h1{
     color:red;  
 }
+
+.post-list {
+    width: 100%;
+    text-align: center;
+}
+
+.user-post{
+    width: 75%;
+    height: 30px;
+    border: 2px solid lightgrey;
+    margin: 5px;
+    display: inline-block
+}
+
+.user-post:hover{
+    background: lightgrey;
+}
