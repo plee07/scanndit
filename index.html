@@ -8,25 +8,32 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
     <header class="header logged-out">
         <div class="logo logged-out">Scanndit</div>
         <div class="user-dropdown" hidden>
-            
+
         </div>
     </header>
-    
+
     <div class="main-container">
         <div class="create-post-wrapper">
             <div class="login-signup-buttons">
                 <button class="login-button">Login</button>
                 <button class="signup-button">Sign Up</button>
-            </div> 
+            </div>
             <div class="create-new-post" hidden>
                 <button class="create-new-post-button">Create New Post</button>
             </div>
         </div>
-        <ul class="all-posts"></ul>
+        <div class="post-list">
+          <div class="all-posts"></div>
+          <button class="load-more-button" type="button" name="button">Load More</button>
+        </div>
     </div>
+
+    <script src="js/api.js" charset="utf-8"></script>
     <script src="js/index.js"></script>
+
 </body>
 </html>
