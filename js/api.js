@@ -22,7 +22,7 @@ const newUser = {
 }
 // New User signup
 async function postNewUser(newUser){
-  let response = await fetch(`${API_ENDPOINT_BASE}post/signup`, {
+  let response = await fetch(`${API_ENDPOINT_BASE}signup`, {
       method: 'POST',
       headers:{
           'Accept': 'application/json',
@@ -30,8 +30,7 @@ async function postNewUser(newUser){
       },
       body: JSON.stringify(newUser)
   })
-  let token = await response.json();
-  return token;
+  return response;
 }
 
 // Existing User Login

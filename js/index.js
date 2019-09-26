@@ -1,5 +1,11 @@
 const POSTS_PER_PAGE = 25;
 
+function handleSignupResponse(signupResponse) {
+  document.cookie = `access_token=${signupResponse.token}`;
+  document.cookie = `username=${signupResponse.username}`;
+  console.log(`${signupResponse.username} has logged in...`);
+   $('#signupModal').modal('hide');
+}
 
 function postClick(event) {
   console.log(this.dataset.postId);
@@ -23,20 +29,50 @@ function appendToHomepageFeed(data, page) {
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
+  const closeButton = document.querySelector('#close-btn');
+  const userLogin = document.querySelector('#user-login');
+  const userPassword = document.querySelector('#user-password');
+  const loginButton = document.querySelector('#login-btn');
+
+  const signupEmail = document.querySelector('#signup-email');
+  const signupUsername = document.querySelector('#signup-username');
+  const signupPassword = document.querySelector('#signup-password');
+  const signupButton = document.querySelector('#signup-btn');
+
+  const loadMoreButton = document.querySelector('#load-more-button');
+
   // Get first page of posts and append to all-posts div
   window.pagesDisplayed = 0;
   getAllPosts()
     .then(data => appendToHomepageFeed(data, window.pagesDisplayed + 1));
 
-  const loadMoreButton = document.querySelector('#load-more-button');
   loadMoreButton.addEventListener('click',()=>{
     getAllPosts()
-    .then(data => appendToHomepageFeed(data, window.pagesDisplayed + 1));
+      .then(data => appendToHomepageFeed(data, window.pagesDisplayed + 1));
   });
-  const userLogin = document.querySelector('#user-login');
-  const userPassword = document.querySelector('#user-password');
-  const loginButton = document.querySelector('#login-btn');
-  const closeButton = document.querySelector('#close-btn');
+
+  signupButton.addEventListener('click', function () {
+    let user = {
+      email: signupEmail.value,
+      password: signupPassword.value,
+      username: signupUsername.value,
+    };
+    postNewUser(user)
+      .then(function(response) {
+      	if (!response.ok) {
+          // TODO: HANDLE BAD RESPONSE
+          console.log('Sign Up received a bad response. HANDLE THIS BETTER');
+          // throw Error(response.statusText);
+      	}
+      	return response;
+      })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(signupResponse => {
+          handleSignupResponse(signupResponse);
+      });
+  })
 
   //User login event
   loginButton.addEventListener('click', ()=>{
@@ -60,7 +96,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         errorMessage.innerText = "";
         document.querySelector('.create-new-post').hidden = false;
         document.querySelector('.login-signup-buttons').hidden = true;
-        
+
       }
     })
   })
@@ -69,4 +105,3 @@ window.addEventListener('DOMContentLoaded', (event) => {
   closeButton.addEventListener('click',()=> document.querySelector('.error-message').hidden = true);
 
 });
-
