@@ -24,3 +24,18 @@ h1{
     border-radius: 25px;
     margin: 5px;
 }
+
+.create-post-wrapper{
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+button {
+    width: 200px;
+    margin: 15px;
+}
+
+.close{
+    text-align: right;
+}

@@ -28,12 +28,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
   getAllPosts()
     .then(data => appendToHomepageFeed(data, window.pagesDisplayed + 1));
 
-  const loadMoreButton = document.querySelector('.load-more-button');
+  const loadMoreButton = document.querySelector('#load-more-button');
   loadMoreButton.addEventListener('click',()=>{
     getAllPosts()
     .then(data => appendToHomepageFeed(data, window.pagesDisplayed + 1));
   });
 
+  const loginButton = document.querySelector('#login-btn');
+  loginButton.addEventListener('click', ()=>{
+    console.log("test")
+  })
 
 });
 
