@@ -22,7 +22,7 @@ async function getPostsByUser(access_token) {
   }).then(function (response) {
     if (!response.ok) {
       // TODO: HANDLE BAD RESPONSE BETTER
-      console.log('getProfile received a bad response. HANDLE THIS BETTER');
+      console.log('getPostsByUser received a bad response. HANDLE THIS BETTER');
       throw Error(response.statusText);
     }
     return response;
@@ -64,7 +64,7 @@ async function createOrUpdateProfile(access_token, altEmail, mobileNumber, addre
   }).then(function (response) {
     if (!response.ok) {
       // TODO: HANDLE BAD RESPONSE BETTER
-      console.log('getProfile received a bad response. HANDLE THIS BETTER');
+      console.log('createOrUpdateProfile received a bad response. HANDLE THIS BETTER');
       throw Error(response.statusText);
     }
     return response;
@@ -160,11 +160,6 @@ function cookieParser(cookie){
       return Object.assign(res, { [key]: val })
     }
   }, {});
-
-  // {
-  //   "text" : "Phil's comment."
-  // }
-  // Posting a comment
 }
 
 async function postComment(comment, auth, postId){
