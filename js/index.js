@@ -1,10 +1,11 @@
 const POSTS_PER_PAGE = 25;
 
 function handleSignupResponse(signupResponse) {
-  document.cookie = `access_token=${signupResponse.token}`;
-  document.cookie = `username=${signupResponse.username}`;
-  console.log(`${signupResponse.username} has logged in...`);
-   $('#signupModal').modal('hide');
+  console.log(signupResponse);
+  // document.cookie = `access_token=${signupResponse.token}`;
+  // document.cookie = `username=${signupResponse.username}`;
+  // console.log(`${signupResponse.username} has logged in...`);
+  //  $('#signupModal').modal('hide');
 }
 
 function postClick(event) {
@@ -52,25 +53,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
   });
 
   signupButton.addEventListener('click', function () {
-    let user = {
-      email: signupEmail.value,
-      password: signupPassword.value,
-      username: signupUsername.value,
-    };
-    postNewUser(user)
-      .then(function(response) {
-      	if (!response.ok) {
-          // TODO: HANDLE BAD RESPONSE
-          console.log('Sign Up received a bad response. HANDLE THIS BETTER');
-          // throw Error(response.statusText);
-      	}
-      	return response;
-      })
-      .then(function(response) {
-        return response.json();
-      })
-      .then(signupResponse => {
-          handleSignupResponse(signupResponse);
+    signUp(signupEmail.value, signupPassword.value, signupUsername.value)
+      .then(response => {
+        handleSignupResponse(response);
       });
   })
 

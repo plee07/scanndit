@@ -21,15 +21,46 @@ const newUser = {
   "username" : "pat"
 }
 // New User signup
-async function postNewUser(newUser){
+// async function signUp(newUser){
+//   let response = await fetch(`${API_ENDPOINT_BASE}signup`, {
+//       method: 'POST',
+//       headers:{
+//           'Accept': 'application/json',
+//           'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify(newUser)
+//   })
+//   return response;
+// }
+//
+async function signUp(email, password, username){
+  let user = {
+    email: email,
+    password: password,
+    username: username,
+  };
+
   let response = await fetch(`${API_ENDPOINT_BASE}signup`, {
-      method: 'POST',
-      headers:{
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newUser)
+    method: 'POST',
+    headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(user)
   })
+    .then(function(response) {
+      if (!response.ok) {
+        // TODO: HANDLE BAD RESPONSE BETTER
+        console.log('Sign Up received a bad response. HANDLE THIS BETTER');
+        throw Error(response.statusText);
+      }
+      return response;
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .catch(err => err);
+
   return response;
 }
 
