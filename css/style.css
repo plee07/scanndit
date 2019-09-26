@@ -18,3 +18,9 @@ h1{
 .user-post:hover{
     background: lightgrey;
 }
+
+
+.login-setting{
+    border-radius: 25px;
+    margin: 5px;
+}
