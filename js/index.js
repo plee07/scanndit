@@ -42,8 +42,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   const loadMoreButton = document.querySelector('#load-more-button');
 
-  const createPostButton = document.querySelector('.create-new-post-button');
+  const postButton = document.querySelector('#post-btn');
+  const postTitle = document.querySelector('#new-title');
+  const postText = document.querySelector('#new-post');
 
+  
   // Get first page of posts and append to all-posts div
   window.pagesDisplayed = 0;
   getAllPosts()
@@ -94,8 +97,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
   closeButton.addEventListener('click',()=> document.querySelector('.error-message').hidden = true);
 
   // User Create Posts
-  createPostButton.addEventListener('click',()=>{
-    console.log("testing")
+  postButton.addEventListener('click',()=>{
+    createNewPost(postTitle.value, postText.value, document.cookie).then(res => {
+      let postFeed = document.querySelector('.all-posts');
+      let postDisplay = document.createElement('div');
+      postDisplay.className = 'user-post'
+      postDisplay.innerText = `${res.user.username}: ${res.title}`;
+      postDisplay.setAttribute('data-post-id', res.id);
+      postDisplay.addEventListener('click', postClick);
+      postFeed.prepend(postDisplay);
+      $('#postModal').modal('hide');
+    })
   })
 
 
