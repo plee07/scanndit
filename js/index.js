@@ -12,6 +12,16 @@ function postClick(event) {
   console.log(this.dataset.postId);
 }
 
+// returns a div element of the post
+function postSetUp(post){
+  let postDisplay = document.createElement('div');
+  postDisplay.className = 'user-post'
+  postDisplay.innerText = `${post.user.username}: ${post.title}`;
+  postDisplay.setAttribute('data-post-id', post.id);
+  postDisplay.addEventListener('click', postClick);
+  return postDisplay;
+}
+
 function appendToHomepageFeed(data, page) {
   let allPosts = document.querySelector('.all-posts');
   let i1 = ((page - 1) * POSTS_PER_PAGE)
@@ -19,11 +29,12 @@ function appendToHomepageFeed(data, page) {
   let pageOfPosts = data.slice(i1,i2);
   let postFeed = document.querySelector('.all-posts');
   for (post of pageOfPosts) {
-    let postDisplay = document.createElement('div');
-    postDisplay.className = 'user-post'
-    postDisplay.innerText = `${post.user.username}: ${post.title}`;
-    postDisplay.setAttribute('data-post-id', post.id);
-    postDisplay.addEventListener('click', postClick);
+    // let postDisplay = document.createElement('div');
+    // postDisplay.className = 'user-post'
+    // postDisplay.innerText = `${post.user.username}: ${post.title}`;
+    // postDisplay.setAttribute('data-post-id', post.id);
+    // postDisplay.addEventListener('click', postClick);
+    let postDisplay = postSetUp(post);
     postFeed.append(postDisplay);
   }
   window.pagesDisplayed++;
@@ -100,11 +111,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   postButton.addEventListener('click',()=>{
     createNewPost(postTitle.value, postText.value, document.cookie).then(res => {
       let postFeed = document.querySelector('.all-posts');
-      let postDisplay = document.createElement('div');
-      postDisplay.className = 'user-post'
-      postDisplay.innerText = `${res.user.username}: ${res.title}`;
-      postDisplay.setAttribute('data-post-id', res.id);
-      postDisplay.addEventListener('click', postClick);
+      let postDisplay = postSetUp(res);
       postFeed.prepend(postDisplay);
       $('#postModal').modal('hide');
     })
