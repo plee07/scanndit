@@ -15,19 +15,10 @@ function buildHeader(access_token = null) {
   return(header);
 }
 
-let headerWithAuth = {
-  'Authorization': 'Bearer ' + access_token,
-  'Content-Type': 'application/json'
-}
-
 async function getPostsByUser(access_token) {
   let response = await fetch(`${API_ENDPOINT_BASE}user/post/`, {
     method: 'GET',
-    headers: {
-      'Authorization': 'Bearer ' + access_token,
-      'X-FP-API-KEY': 'iphone',
-      'Content-Type': 'application/json'
-    }
+    headers: buildHeader(access_token)
   }).then(function (response) {
     if (!response.ok) {
       // TODO: HANDLE BAD RESPONSE BETTER
@@ -45,11 +36,7 @@ async function getPostsByUser(access_token) {
 async function getProfile(access_token) {
   let response = await fetch(`${API_ENDPOINT_BASE}profile`, {
     method: 'GET',
-    headers: {
-      'Authorization': 'Bearer ' + access_token,
-      'X-FP-API-KEY': 'iphone',
-      'Content-Type': 'application/json'
-    }
+    headers: buildHeader(access_token)
   }).then(function (response) {
     if (!response.ok) {
       // TODO: HANDLE BAD RESPONSE BETTER
@@ -72,11 +59,7 @@ async function createOrUpdateProfile(access_token, altEmail, mobileNumber, addre
   };
   let response = await fetch(`${API_ENDPOINT_BASE}profile`, {
     method: 'POST',
-    headers: {
-      'Authorization': 'Bearer ' + access_token,
-      'X-FP-API-KEY': 'iphone',
-      'Content-Type': 'application/json'
-    },
+    headers: buildHeader(access_token),
     body: JSON.stringify(profileInfo)
   }).then(function (response) {
     if (!response.ok) {
@@ -108,24 +91,6 @@ async function getAllComments(postId){
 }
 
 
-const newUser = {
-  "email" : "pan@test200.com",
-  "password" : "test5012",
-  "username" : "pat"
-}
-// New User signup
-// async function signUp(newUser){
-//   let response = await fetch(`${API_ENDPOINT_BASE}signup`, {
-//       method: 'POST',
-//       headers:{
-//           'Accept': 'application/json',
-//           'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify(newUser)
-//   })
-//   return response;
-// }
-//
 async function signUp(email, password, username){
   let user = {
     email: email,
@@ -135,10 +100,7 @@ async function signUp(email, password, username){
 
   let response = await fetch(`${API_ENDPOINT_BASE}signup`, {
     method: 'POST',
-    headers:{
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    },
+    headers: buildHeader(),
     body: JSON.stringify(user)
   })
     .then(function(response) {
@@ -161,10 +123,7 @@ async function signUp(email, password, username){
 async function loginUser(user){
   let response = await fetch(`${API_ENDPOINT_BASE}login`, {
     method: 'POST',
-    headers:{
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
+    headers: buildHeader(),
     body: JSON.stringify(user)
 })
 
@@ -181,13 +140,9 @@ async function createNewPost(userTitle, userDescr, auth){
   }
   let response = await fetch(`${API_ENDPOINT_BASE}post`,{
     method: 'POST',
-    headers:{
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + userAuth.access_token,
-    },
-  body: JSON.stringify(post)
-  })
+    headers: buildHeader(userAuth.access_token),
+    body: JSON.stringify(post)
+  });
   let res = await response.json();
   return res;
 }
@@ -216,11 +171,7 @@ async function postComment(comment, auth, postId){
   let userAuth = cookieParser(auth);
   let response = await fetch(`${API_ENDPOINT_BASE}comment/${postId}`, {
   method: "POST",
-  headers: {
-      'Accept': 'application/json',
-      'Authorization': 'Bearer ' + userAuth.access_token,
-      'Content-Type': 'application/json'
-  },
+  headers: buildHeader(userAuth.access_token),
   body: JSON.stringify(comment)
   })
   return response;

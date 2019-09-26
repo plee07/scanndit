@@ -27,7 +27,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const postHeader = document.querySelector('.post-title');
   let postId = window.location.hash.slice(1);
   let post = JSON.parse(localStorage.getItem(postId));
-  
+
   const postTitle = document.createElement('h1');
   const postDescr = document.createElement('p');
   postTitle.innerText = `${post.user.username}: ${post.title}`;
@@ -84,8 +84,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
       "text": comment
     }
     console.log(comm + " " + document.cookie + " " +  postId);
-    postComment(comm, document.cookie, postId);
-    location.reload();
-  
+    postComment(comm, document.cookie, postId).then(response => {
+      return response.json();
+    }).then(response => {
+      location.reload();
+    })
   })
 });
