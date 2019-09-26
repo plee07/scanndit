@@ -2,10 +2,10 @@ const POSTS_PER_PAGE = 25;
 
 function handleSignupResponse(signupResponse) {
   console.log(signupResponse);
-  // document.cookie = `access_token=${signupResponse.token}`;
-  // document.cookie = `username=${signupResponse.username}`;
-  // console.log(`${signupResponse.username} has logged in...`);
-  //  $('#signupModal').modal('hide');
+  document.cookie = `access_token=${signupResponse.token}`;
+  document.cookie = `username=${signupResponse.username}`;
+  console.log(`${signupResponse.username} has logged in...`);
+   $('#signupModal').modal('hide');
 }
 
 function postClick(event) {
@@ -61,7 +61,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const postTitle = document.querySelector('#new-title');
   const postText = document.querySelector('#new-post');
 
-  
+
   // Get first page of posts and append to all-posts div
   window.pagesDisplayed = 0;
   getAllPosts()

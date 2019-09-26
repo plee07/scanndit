@@ -1,81 +1,3 @@
-// ---- Move all below to api.js after merge ---
-const API_ENDPOINT_BASE = 'http://thesi.generalassemb.ly:8080/'; // delete this when moving to api.js
-
-async function getPostsByUser(access_token) {
-  let response = await fetch(`${API_ENDPOINT_BASE}user/post/`, {
-    method: 'GET',
-    headers: {
-      'Authorization': 'Bearer ' + access_token,
-      'X-FP-API-KEY': 'iphone',
-      'Content-Type': 'application/json'
-    }
-  }).then(function (response) {
-    if (!response.ok) {
-      // TODO: HANDLE BAD RESPONSE BETTER
-      console.log('getProfile received a bad response. HANDLE THIS BETTER');
-      throw Error(response.statusText);
-    }
-    return response;
-  }).then(function(response) {
-    return response.json();
-  }).catch(err => err);
-
-  return response;
-}
-
-async function getProfile(access_token) {
-  let response = await fetch(`${API_ENDPOINT_BASE}profile`, {
-    method: 'GET',
-    headers: {
-      'Authorization': 'Bearer ' + access_token,
-      'X-FP-API-KEY': 'iphone',
-      'Content-Type': 'application/json'
-    }
-  }).then(function (response) {
-    if (!response.ok) {
-      // TODO: HANDLE BAD RESPONSE BETTER
-      console.log('getProfile received a bad response. HANDLE THIS BETTER');
-      throw Error(response.statusText);
-    }
-    return response;
-  }).then(function(response) {
-    return response.json();
-  }).catch(err => err);
-
-  return response;
-}
-
-async function createOrUpdateProfile(access_token, altEmail, mobileNumber, address) {
-  let profileInfo = {
-    additionalEmail: altEmail,
-    mobile: mobileNumber,
-    address: address
-  };
-  let response = await fetch(`${API_ENDPOINT_BASE}profile`, {
-    method: 'POST',
-    headers: {
-      'Authorization': 'Bearer ' + access_token,
-      'X-FP-API-KEY': 'iphone',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(profileInfo)
-  }).then(function (response) {
-    if (!response.ok) {
-      // TODO: HANDLE BAD RESPONSE BETTER
-      console.log('getProfile received a bad response. HANDLE THIS BETTER');
-      throw Error(response.statusText);
-    }
-    return response;
-  }).then(function(response) {
-    return response.json();
-  }).catch(err => err);
-
-  return response;
-}
-// ---- Move all above to api.js after merge ---
-
-
-
 function handleSaveProfileResponse(profileResponse) {
   if (profileResponse.name == "error") {
     // Notify user that their profile update was not actually saved
@@ -179,12 +101,6 @@ function handleProfileResponse(profileResponse) {
     console.log('didnt expect to end up here, not sure whats happening');
   }
   document.querySelector('.profile').removeAttribute('hidden');
-}
-
-function getCookie(name) {
-  var value = "; " + document.cookie;
-  var parts = value.split("; " + name + "=");
-  if (parts.length == 2) return parts.pop().split(";").shift();
 }
 
 // ON DOM CONTENT LOADED
