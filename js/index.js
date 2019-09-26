@@ -90,7 +90,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
       }
       else{
-        console.log(response.token);
+        document.cookie = `access_token=${response.token}`;
+        document.cookie = `username=${response.username}`;
+        // console.log(response.token);
         errorMessage.hidden = true;
         closeButton.click();
         errorMessage.innerText = "";
@@ -103,5 +105,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   //Close out of login modal
   closeButton.addEventListener('click',()=> document.querySelector('.error-message').hidden = true);
+
 
 });

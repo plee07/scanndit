@@ -15,6 +15,7 @@ async function getAllComments(postId){
   return data;
 }
 
+
 const newUser = {
   "email" : "pan@test200.com",
   "password" : "test5012",
@@ -23,11 +24,11 @@ const newUser = {
 // New User signup
 async function postNewUser(newUser){
   let response = await fetch(`${API_ENDPOINT_BASE}signup`, {
-      method: 'POST',
+    method: 'POST',
       headers:{
           'Accept': 'application/json',
           'Content-Type': 'application/json'
-      },
+        },
       body: JSON.stringify(newUser)
   })
   return response;
@@ -40,10 +41,45 @@ async function loginUser(user){
     headers:{
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-    },
+      },
     body: JSON.stringify(user)
 })
 
 let token = await response.json();
 return token;
+}
+
+
+// document.cookie parser
+// obtained from https://gist.github.com/rendro/525bbbf85e84fa9042c2
+function cookieParser(cookie){
+  return document.cookie
+  .split(';')
+  .reduce((res, c) => {
+    const [key, val] = c.trim().split('=').map(decodeURIComponent)
+    try {
+      return Object.assign(res, { [key]: JSON.parse(val) })
+    } catch (e) {
+      return Object.assign(res, { [key]: val })
+    }
+  }, {});
+  
+  {
+    "text" : "Phil's comment."
+  }
+  // Posting a comment
+  async function postComment(comment, auth, postId){
+    let userAuth = cookieParser(auth);
+    let response = await fetch(`${API_ENDPOINT_BASE}comment/${postId}`, {
+    method: "POST",
+    withCredentials: true,
+    credentials: 'include',
+    headers: {
+        'Authorization': 'Bearer ' + userAuth.access_token,
+        'Content-Type': 'application/json'
+    },
+    body: comment
+    })
+    return response;
+  }
 }
