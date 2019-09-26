@@ -55,6 +55,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
         console.log(response.token);
         errorMessage.hidden = true;
         document.querySelector('#close-btn').click();
+        document.querySelector('.create-new-post').hidden = false;
+        document.querySelector('.login-signup-buttons').hidden = true;
+        
       }
     })
 

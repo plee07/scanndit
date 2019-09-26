@@ -3,16 +3,17 @@ h1{
 }
 
 .post-list {
-    width: 100%;
-    align-content: center;
+    width: 70%;
+    margin: 0 auto;
 }
 
 .user-post{
-    width: 75%;
-    height: 30px;
+    width: 90%;
+    height: auto;
     border: 2px solid lightgrey;
     margin: 5px;
-    display: inline-block
+    display: inline-block;
+    padding-left: 20px
 }
 
 .user-post:hover{
@@ -38,4 +39,10 @@ button {
 
 .close{
     text-align: right;
+}
+
+#load-more-button{
+    text-align: center;
+    width: 91%;
+    margin: 0 auto;
 }
