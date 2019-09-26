@@ -1,8 +1,14 @@
 const API_ENDPOINT_BASE = 'http://thesi.generalassemb.ly:8080/';
 
+function isLoggedIn() {
+  cookieObject = cookieParser(document.cookie);
+  return (typeof cookieObject.access_token != 'undefined');
+}
+
 function getCookie(name) {
   var value = "; " + document.cookie;
   var parts = value.split("; " + name + "=");
+  console.log(parts);
   if (parts.length == 2) return parts.pop().split(";").shift();
 }
 

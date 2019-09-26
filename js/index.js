@@ -1,11 +1,22 @@
 const POSTS_PER_PAGE = 25;
 
+function successfulLogin() {
+  document.querySelector('.login-signup-buttons').hidden = true;
+  document.querySelector('.create-new-post').hidden = false;
+}
+
+function logout() {
+  document.querySelector('.login-signup-buttons').hidden = false;
+  document.querySelector('.create-new-post').hidden = true;
+}
+
 function handleSignupResponse(signupResponse) {
   console.log(signupResponse);
   document.cookie = `access_token=${signupResponse.token}`;
   document.cookie = `username=${signupResponse.username}`;
   console.log(`${signupResponse.username} has logged in...`);
-   $('#signupModal').modal('hide');
+  successfulLogin();
+  $('#signupModal').modal('hide');
 }
 
 function postClick(event) {
@@ -45,6 +56,17 @@ function appendToHomepageFeed(data, page) {
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
+
+  // v CHECK LOGIN STATE
+  if (isLoggedIn()) {
+    console.log("ajsdfkjahsdlkfahsldkfhaslkjhd");
+    successfulLogin();
+  } else {
+    console.log("ajsdfkjahsdlkfahsldkfhaslkjhd");
+    logout();
+  }
+  // ^ CHECK LOGIN STATE
+
   const closeButton = document.querySelector('#close-btn');
   const userLogin = document.querySelector('#user-login');
   const userPassword = document.querySelector('#user-password');
