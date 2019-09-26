@@ -36,7 +36,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const userLogin = document.querySelector('#user-login');
   const userPassword = document.querySelector('#user-password');
   const loginButton = document.querySelector('#login-btn');
-  
+  const closeButton = document.querySelector('#close-btn');
+
+  //User login event
   loginButton.addEventListener('click', ()=>{
     const user = {
       "email" : userLogin.value,
@@ -54,14 +56,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
       else{
         console.log(response.token);
         errorMessage.hidden = true;
-        document.querySelector('#close-btn').click();
+        closeButton.click();
+        errorMessage.innerText = "";
         document.querySelector('.create-new-post').hidden = false;
         document.querySelector('.login-signup-buttons').hidden = true;
         
       }
     })
-
   })
+
+  //Close out of login modal
+  closeButton.addEventListener('click',()=> document.querySelector('.error-message').hidden = true);
 
 });
 

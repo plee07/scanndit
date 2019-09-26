@@ -46,3 +46,7 @@ button {
     width: 91%;
     margin: 0 auto;
 }
+
+.error-message{
+    color: red;
+}
