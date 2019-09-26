@@ -16,13 +16,18 @@ function postClick(event) {
 function postSetUp(post){
   let postDisplay = document.createElement('div');
   let link = document.createElement('a');
+  let closeButton = document.createElement('button');
+
+  closeButton.innerText = 'X';
+  closeButton.className = "close-btn";
   link.setAttribute("href", `/post/#${post.id}`);
-  postDisplay.className = 'user-post'
+  postDisplay.className = 'user-post';
   postDisplay.innerText = `${post.user.username}: ${post.title}`;
   postDisplay.setAttribute('data-post-id', post.id);
   postDisplay.addEventListener('click', postClick);
   link.appendChild(postDisplay);
   localStorage.setItem(post.id, JSON.stringify(post));
+  sessionStorage.setItem('current-user', post.user.username)
   return link;
 }
 
@@ -98,6 +103,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         errorMessage.innerText = "";
         document.querySelector('.create-new-post').hidden = false;
         document.querySelector('.login-signup-buttons').hidden = true;
+
 
       }
     })
