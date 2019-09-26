@@ -80,6 +80,25 @@ let token = await response.json();
 return token;
 }
 
+//create new Post
+async function createNewPost(userTitle, userDescr, auth){
+  let userAuth = cookieParser(auth);
+  let post = {
+    title: userTitle,
+    description: userDescr
+  }
+  let response = await fetch(`${API_ENDPOINT_BASE}post`,{
+    method: 'POST',
+    headers:{
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + userAuth.access_token,
+    },
+  body: JSON.stringify(post)
+  })
+  let res = await response.json();
+  return res;
+}
 
 // document.cookie parser
 // obtained from https://gist.github.com/rendro/525bbbf85e84fa9042c2
@@ -99,18 +118,18 @@ function cookieParser(cookie){
   //   "text" : "Phil's comment."
   // }
   // Posting a comment
-  async function postComment(comment, auth, postId){
-    let userAuth = cookieParser(auth);
-    let response = await fetch(`${API_ENDPOINT_BASE}comment/${postId}`, {
-    method: "POST",
-    withCredentials: true,
-    credentials: 'include',
-    headers: {
-        'Authorization': 'Bearer ' + userAuth.access_token,
-        'Content-Type': 'application/json'
-    },
-    body: comment
-    })
-    return response;
-  }
+}
+
+async function postComment(comment, auth, postId){
+  let userAuth = cookieParser(auth);
+  let response = await fetch(`${API_ENDPOINT_BASE}comment/${postId}`, {
+  method: "POST",
+  headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + userAuth.access_token,
+      'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(comment)
+  })
+  return response;
 }

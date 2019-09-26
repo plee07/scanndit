@@ -50,3 +50,7 @@ button {
 .error-message{
     color: red;
 }
+
+.custom-size{
+    height: 600px;
+}

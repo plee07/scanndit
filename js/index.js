@@ -12,6 +12,25 @@ function postClick(event) {
   console.log(this.dataset.postId);
 }
 
+// returns a div element of the post
+function postSetUp(post){
+  let postDisplay = document.createElement('div');
+  let link = document.createElement('a');
+  let closeButton = document.createElement('button');
+
+  closeButton.innerText = 'X';
+  closeButton.className = "close-btn";
+  link.setAttribute("href", `/post/#${post.id}`);
+  postDisplay.className = 'user-post';
+  postDisplay.innerText = `${post.user.username}: ${post.title}`;
+  postDisplay.setAttribute('data-post-id', post.id);
+  postDisplay.addEventListener('click', postClick);
+  link.appendChild(postDisplay);
+  localStorage.setItem(post.id, JSON.stringify(post));
+  sessionStorage.setItem('current-user', post.user.username)
+  return link;
+}
+
 function appendToHomepageFeed(data, page) {
   let allPosts = document.querySelector('.all-posts');
   let i1 = ((page - 1) * POSTS_PER_PAGE)
@@ -19,11 +38,7 @@ function appendToHomepageFeed(data, page) {
   let pageOfPosts = data.slice(i1,i2);
   let postFeed = document.querySelector('.all-posts');
   for (post of pageOfPosts) {
-    let postDisplay = document.createElement('div');
-    postDisplay.className = 'user-post'
-    postDisplay.innerText = `${post.user.username}: ${post.title}`;
-    postDisplay.setAttribute('data-post-id', post.id);
-    postDisplay.addEventListener('click', postClick);
+    let postDisplay = postSetUp(post);
     postFeed.append(postDisplay);
   }
   window.pagesDisplayed++;
@@ -42,6 +57,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   const loadMoreButton = document.querySelector('#load-more-button');
 
+  const postButton = document.querySelector('#post-btn');
+  const postTitle = document.querySelector('#new-title');
+  const postText = document.querySelector('#new-post');
+
+  
   // Get first page of posts and append to all-posts div
   window.pagesDisplayed = 0;
   getAllPosts()
@@ -84,12 +104,23 @@ window.addEventListener('DOMContentLoaded', (event) => {
         document.querySelector('.create-new-post').hidden = false;
         document.querySelector('.login-signup-buttons').hidden = true;
 
+
       }
     })
   })
 
   //Close out of login modal
   closeButton.addEventListener('click',()=> document.querySelector('.error-message').hidden = true);
+
+  // User Create Posts
+  postButton.addEventListener('click',()=>{
+    createNewPost(postTitle.value, postText.value, document.cookie).then(res => {
+      let postFeed = document.querySelector('.all-posts');
+      let postDisplay = postSetUp(res);
+      postFeed.prepend(postDisplay);
+      $('#postModal').modal('hide');
+    })
+  })
 
 
 });
