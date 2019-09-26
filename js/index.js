@@ -42,6 +42,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   const loadMoreButton = document.querySelector('#load-more-button');
 
+  const createPostButton = document.querySelector('.create-new-post-button');
+
   // Get first page of posts and append to all-posts div
   window.pagesDisplayed = 0;
   getAllPosts()
@@ -90,6 +92,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
   //Close out of login modal
   closeButton.addEventListener('click',()=> document.querySelector('.error-message').hidden = true);
+
+  // User Create Posts
+  createPostButton.addEventListener('click',()=>{
+    console.log("testing")
+  })
 
 
 });

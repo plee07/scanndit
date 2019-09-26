@@ -80,6 +80,25 @@ let token = await response.json();
 return token;
 }
 
+//create new Post
+async function createNewPost(userTitle, userDescr, auth){
+  let userAuth = cookieParser(auth);
+  let post = {
+    title: userTitle,
+    description: userDescr
+  }
+  let response = await fetch(`${API_ENDPOINT_BASE}post`,{
+    method: 'POST',
+    headers:{
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + userAuth.access_token,
+    },
+  body: JSON.stringify(post)
+  })
+  let res = await response.json();
+  return res;
+}
 
 // document.cookie parser
 // obtained from https://gist.github.com/rendro/525bbbf85e84fa9042c2
