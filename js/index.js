@@ -15,11 +15,14 @@ function postClick(event) {
 // returns a div element of the post
 function postSetUp(post){
   let postDisplay = document.createElement('div');
+  let link = document.createElement('a');
+  link.setAttribute("href", `/post/#${post.id}`);
   postDisplay.className = 'user-post'
   postDisplay.innerText = `${post.user.username}: ${post.title}`;
   postDisplay.setAttribute('data-post-id', post.id);
   postDisplay.addEventListener('click', postClick);
-  return postDisplay;
+  link.appendChild(postDisplay);
+  return link;
 }
 
 function appendToHomepageFeed(data, page) {
@@ -29,11 +32,6 @@ function appendToHomepageFeed(data, page) {
   let pageOfPosts = data.slice(i1,i2);
   let postFeed = document.querySelector('.all-posts');
   for (post of pageOfPosts) {
-    // let postDisplay = document.createElement('div');
-    // postDisplay.className = 'user-post'
-    // postDisplay.innerText = `${post.user.username}: ${post.title}`;
-    // postDisplay.setAttribute('data-post-id', post.id);
-    // postDisplay.addEventListener('click', postClick);
     let postDisplay = postSetUp(post);
     postFeed.append(postDisplay);
   }
