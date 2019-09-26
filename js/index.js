@@ -22,6 +22,7 @@ function postSetUp(post){
   postDisplay.setAttribute('data-post-id', post.id);
   postDisplay.addEventListener('click', postClick);
   link.appendChild(postDisplay);
+  localStorage.setItem(post.id, JSON.stringify(post));
   return link;
 }
 
