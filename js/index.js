@@ -33,10 +33,31 @@ window.addEventListener('DOMContentLoaded', (event) => {
     getAllPosts()
     .then(data => appendToHomepageFeed(data, window.pagesDisplayed + 1));
   });
-
+  const userLogin = document.querySelector('#user-login');
+  const userPassword = document.querySelector('#user-password');
   const loginButton = document.querySelector('#login-btn');
+  
   loginButton.addEventListener('click', ()=>{
-    console.log("test")
+    const user = {
+      "email" : userLogin.value,
+      "password" : userPassword.value
+    }
+    loginUser(user).then(res=> {
+      let response = res;
+      let errorMessage = document.querySelector('.error-message');
+      if(response.token === undefined){
+        console.log(response.message);
+        errorMessage.innerText = response.message;
+        errorMessage.hidden = false;
+
+      }
+      else{
+        console.log(response.token);
+        errorMessage.hidden = true;
+        document.querySelector('#close-btn').click();
+      }
+    })
+
   })
 
 });

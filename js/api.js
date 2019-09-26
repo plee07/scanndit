@@ -34,5 +34,17 @@ async function postNewUser(newUser){
   return token;
 }
 
-postNewUser(newUser).then(res => console.log(res));
+// Existing User Login
+async function loginUser(user){
+  let response = await fetch(`${API_ENDPOINT_BASE}login`, {
+    method: 'POST',
+    headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(user)
+})
 
+let token = await response.json();
+return token;
+}
