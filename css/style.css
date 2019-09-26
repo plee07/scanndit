@@ -1,5 +1,21 @@
+body.logged-out .login-signup-buttons {
+}
+body.logged-in .login-signup-buttons {
+  display: none;
+}
+
+body.logged-in .create-new-post {
+}
+body.logged-out .create-new-post {
+  display: none
+}
+
 h1{
-    color:red;  
+    color:red;
+}
+
+.dropdown {
+  float: right;
 }
 
 .post-list {
