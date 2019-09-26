@@ -28,12 +28,45 @@ window.addEventListener('DOMContentLoaded', (event) => {
   getAllPosts()
     .then(data => appendToHomepageFeed(data, window.pagesDisplayed + 1));
 
-  const loadMoreButton = document.querySelector('.load-more-button');
+  const loadMoreButton = document.querySelector('#load-more-button');
   loadMoreButton.addEventListener('click',()=>{
     getAllPosts()
     .then(data => appendToHomepageFeed(data, window.pagesDisplayed + 1));
   });
+  const userLogin = document.querySelector('#user-login');
+  const userPassword = document.querySelector('#user-password');
+  const loginButton = document.querySelector('#login-btn');
+  const closeButton = document.querySelector('#close-btn');
 
+  //User login event
+  loginButton.addEventListener('click', ()=>{
+    const user = {
+      "email" : userLogin.value,
+      "password" : userPassword.value
+    }
+    loginUser(user).then(res=> {
+      let response = res;
+      let errorMessage = document.querySelector('.error-message');
+      if(response.token === undefined){
+        console.log(response.message);
+        errorMessage.innerText = response.message;
+        errorMessage.hidden = false;
+
+      }
+      else{
+        console.log(response.token);
+        errorMessage.hidden = true;
+        closeButton.click();
+        errorMessage.innerText = "";
+        document.querySelector('.create-new-post').hidden = false;
+        document.querySelector('.login-signup-buttons').hidden = true;
+        
+      }
+    })
+  })
+
+  //Close out of login modal
+  closeButton.addEventListener('click',()=> document.querySelector('.error-message').hidden = true);
 
 });
 
