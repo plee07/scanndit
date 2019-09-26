@@ -1,5 +1,5 @@
 
-function addComment(comm){
+function populateExistingComment(comm){
   console.log(comm)
   const commentList = document.querySelector('.all-comments');
   const commentDisplay = document.createElement('div');;
@@ -22,12 +22,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const signupPassword = document.querySelector('#signup-password');
   const signupButton = document.querySelector('#signup-btn');
 
-  const commentButton = document.querySelector('#new-comment');
+  const commentButton = document.querySelector('#post-btn');
 
   const postHeader = document.querySelector('.post-title');
   let postId = window.location.hash.slice(1);
   let post = JSON.parse(localStorage.getItem(postId));
-
+  
   const postTitle = document.createElement('h1');
   const postDescr = document.createElement('p');
   postTitle.innerText = `${post.user.username}: ${post.title}`;
@@ -36,7 +36,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   postHeader.appendChild(postDescr);
   getAllComments(postId).then(res =>{
     res.forEach(element => {
-      addComment(element)
+      populateExistingComment(element)
     });
   });
   signupButton.addEventListener('click', function () {
@@ -77,4 +77,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
   //Close out of login modal
   closeButton.addEventListener('click',()=> document.querySelector('.error-message').hidden = true);
 
+  //User post comment
+  commentButton.addEventListener('click',()=> {
+    let comment = document.querySelector('#new-comment').value;
+    const comm = {
+      "text": comment
+    }
+    console.log(comm + " " + document.cookie + " " +  postId);
+    postComment(comm, document.cookie, postId);
+    location.reload();
+  
+  })
 });

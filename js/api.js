@@ -118,18 +118,18 @@ function cookieParser(cookie){
   //   "text" : "Phil's comment."
   // }
   // Posting a comment
-  async function postComment(comment, auth, postId){
-    let userAuth = cookieParser(auth);
-    let response = await fetch(`${API_ENDPOINT_BASE}comment/${postId}`, {
-    method: "POST",
-    withCredentials: true,
-    credentials: 'include',
-    headers: {
-        'Authorization': 'Bearer ' + userAuth.access_token,
-        'Content-Type': 'application/json'
-    },
-    body: comment
-    })
-    return response;
-  }
+}
+
+async function postComment(comment, auth, postId){
+  let userAuth = cookieParser(auth);
+  let response = await fetch(`${API_ENDPOINT_BASE}comment/${postId}`, {
+  method: "POST",
+  headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + userAuth.access_token,
+      'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(comment)
+  })
+  return response;
 }
