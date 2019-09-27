@@ -34,6 +34,7 @@ function postSetUp(post){
 
 function appendToHomepageFeed(data, page) {
   let allPosts = document.querySelector('.all-posts');
+  data = data.reverse();
   let i1 = ((page - 1) * POSTS_PER_PAGE)
   let i2 = (page * POSTS_PER_PAGE);
   let pageOfPosts = data.slice(i1,i2);
@@ -46,6 +47,12 @@ function appendToHomepageFeed(data, page) {
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
+  $(window).scroll(function() {
+    if($(window).scrollTop() + $(window).height() == $(document).height()) {
+      getAllPosts()
+        .then(data => appendToHomepageFeed(data, window.pagesDisplayed + 1));
+    }
+  });
 
   const closeButton = document.querySelector('#close-btn');
   const userLogin = document.querySelector('#user-login');

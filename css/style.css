@@ -10,8 +10,16 @@ body.logged-out .create-new-post {
   display: none
 }
 
+#main-container {
+  padding: 20px;
+  margin: auto;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 992px;
+}
+
 h1{
-    color:red;
+    color: #ff5555;
 }
 
 .dropdown {
@@ -48,10 +56,10 @@ h1{
     text-align: center;
 }
 
-button {
+/* button {
     width: 200px;
     margin: 15px;
-}
+} */
 
 .close{
     text-align: right;
