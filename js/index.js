@@ -1,11 +1,8 @@
 const POSTS_PER_PAGE = 25;
 
 function handleSignupResponse(signupResponse) {
-  console.log(signupResponse);
-  document.cookie = `access_token=${signupResponse.token}`;
-  document.cookie = `username=${signupResponse.username}`;
-  console.log(`${signupResponse.username} has logged in...`);
-  successfulLogin();
+  let user = { token: signupResponse.token, username: signupResponse.username };
+  login(user);
   $('#signupModal').modal('hide');
 }
 
@@ -34,6 +31,7 @@ function postSetUp(post){
 
 function appendToHomepageFeed(data, page) {
   let allPosts = document.querySelector('.all-posts');
+  data = data.reverse();
   let i1 = ((page - 1) * POSTS_PER_PAGE)
   let i2 = (page * POSTS_PER_PAGE);
   let pageOfPosts = data.slice(i1,i2);
@@ -46,6 +44,12 @@ function appendToHomepageFeed(data, page) {
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
+  $(window).scroll(function() {
+    if($(window).scrollTop() + $(window).height() == $(document).height()) {
+      getAllPosts()
+        .then(data => appendToHomepageFeed(data, window.pagesDisplayed + 1));
+    }
+  });
 
   const closeButton = document.querySelector('#close-btn');
   const userLogin = document.querySelector('#user-login');
@@ -97,9 +101,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
       }
       else{
-        document.cookie = `access_token=${response.token}`;
-        document.cookie = `username=${response.username}`;
-        // console.log(response.token);
+        let user = { token: response.token, username: response.username };
+        login(user);
         errorMessage.hidden = true;
         closeButton.click();
         errorMessage.innerText = "";

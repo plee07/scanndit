@@ -13,6 +13,9 @@ function handleSaveProfileResponse(profileResponse) {
 }
 
 function makeProfileNotEditable(buttonState) {
+  document.querySelectorAll(".profile-user-info-field").forEach(function (el) {
+    el.classList.remove("editable");
+  });
   document.querySelectorAll(".profile-field").forEach(function (el) {
     el.setAttribute('disabled', 'disabled');
     el.classList.remove("editable");
@@ -21,6 +24,9 @@ function makeProfileNotEditable(buttonState) {
 }
 
 function makeProfileEditable() {
+  document.querySelectorAll(".profile-user-info-field").forEach(function (el) {
+    el.classList.add("editable");
+  });
   document.querySelectorAll(".profile-field").forEach(function (el) {
     el.removeAttribute('disabled');
     el.classList.add("editable");
@@ -114,6 +120,19 @@ window.addEventListener('DOMContentLoaded', function () {
   let mobileNumberInput = document.querySelector('.profile-mobile-number');
   let addressInput = document.querySelector('.profile-address');
 
+  // console.log(document.querySelectorAll('.profile-user-info-field'));
+  document.querySelectorAll('.profile-user-info-field').forEach(function(el) {
+    el.addEventListener('click', function() {
+      let inputToFocus = this.getElementsByTagName('input')[0];
+      if (document.activeElement != inputToFocus) {
+        let originalValue = inputToFocus.value;
+        inputToFocus.value = '';
+        inputToFocus.focus();
+        inputToFocus.value = originalValue;
+      }
+    });
+  });
+
   profileEditButton.addEventListener('click', function() {
     makeProfileEditable();
   });
@@ -136,8 +155,6 @@ window.addEventListener('DOMContentLoaded', function () {
   });
 
   let access_token = getCookie("access_token");
-  console.log(getCookie("access_token"));
-  console.log(access_token);
   if (typeof(access_token) == "string") {
     getProfile(access_token).then(response => {
       handleProfileResponse(response);
