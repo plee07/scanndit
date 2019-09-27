@@ -5,8 +5,10 @@ function onviewUserPostsClick() {
   let commentsList = document.querySelector('.comments-list');
   viewUserPostsButton.disabled = true;
   viewUserCommentsButton.disabled = false;
-  postList.hidden = false;
-  commentsList.hidden = true;
+  // postList.hidden = false;
+  // commentsList.hidden = true;
+  postList.classList.add('is-visible');
+  commentsList.classList.remove('is-visible');
 }
 
 function onviewUserCommentsClick() {
@@ -16,8 +18,10 @@ function onviewUserCommentsClick() {
   let commentsList = document.querySelector('.comments-list');
   viewUserPostsButton.disabled = false;
   viewUserCommentsButton.disabled = true;
-  postList.hidden = true;
-  commentsList.hidden = false;
+  // postList.hidden = true;
+  // commentsList.hidden = false;
+  postList.classList.remove('is-visible');
+  commentsList.classList.add('is-visible');
 }
 
 function getCookie(name) {
@@ -48,6 +52,9 @@ function makeProfileNotEditable(buttonState) {
     el.setAttribute('disabled', 'disabled');
     el.classList.remove("editable");
   });
+  if (buttonState == 'create') {
+    document.querySelector('.profile-user-info').setAttribute('hidden', 'true');
+  }
   displayButtons(buttonState);
 }
 
@@ -197,17 +204,15 @@ window.addEventListener('DOMContentLoaded', function () {
     // Get first page of posts and append to all-posts div
     getPostsByUser(access_token)
       .then(data => appendToHomepageFeed(data, window.pagesDisplayed + 1));
-    getCommentsByUser(access_token)
-      .then(data => console.log(data) );
+    getCommentsByUser(access_token).then(res =>{
+      console.log(cookieParser(document.cookie).username)
+      res.forEach(element => {
+        populateExistingComment(element, true)
+      });
+    });
   } else {
     console.log("we need to redirect to signup");
   }
 
-  getCommentsByUser(access_token).then(res =>{
-    console.log(cookieParser(document.cookie).username)
-    res.forEach(element => {
-      populateExistingComment(element, true)
-    });
-  });
 
 });
