@@ -29,7 +29,7 @@
 
 **A link to your user stories — who your users are, what they want, and why.**
 
-Our user base is the average everyday person who seeks a platform. As a user, we want a web app that is intiutive to use and therefore we kept our design simple and intuitive.
+Our user base is your average everyday person who seeks a platform to express their highly important opinion and thoughts. In this day and age, a user is typically very busy and don't have the time to learn how to use a product. Therefore, we approached our web app with a minimialist mindset and kept everything as simple and intutive as possible.
 
 **A link to your wireframes — sketches of major views or interfaces in your application.**
 
