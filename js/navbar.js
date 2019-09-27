@@ -23,15 +23,15 @@ function logout() {
 
 let navbarHtml = `
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Scandit</a>
+  <a class="navbar-brand" href="/"><img class="logo" src="/logo.png"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav" id="navbar-profile">
+    <ul class="navbar-nav ml-auto u-custom" id="navbar-profile">
       <li class="nav-item dropdown">
         <a id="dropdown-username" class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <div class="dropdown-menu mr-auto" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="/profile/">My Profile</a>
           <a id="logout-button" class="dropdown-item" href="#">Logout</a>
         </div>

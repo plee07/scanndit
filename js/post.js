@@ -1,13 +1,24 @@
 
 function populateExistingComment(comm){
-  console.log(comm)
+  const user = cookieParser(document.cookie).username;
   const commentList = document.querySelector('.all-comments');
-  const commentDisplay = document.createElement('div');;
-  commentDisplay.className = 'user-comment'
+  const commentDisplay = document.createElement('div');
+  const closeBtn = document.createElement("button");
+  closeBtn.className = "close-button";
+  closeBtn.innerText = "X";
+  
+  commentDisplay.className = 'user-post';
+  console.log(comm)
   commentDisplay.innerText = `${comm.user.username}: ${comm.text}`;
-  // commentDisplay.setAttribute('data-post-id', post.id);
+  console.log(comm.user.username + " " + user);
+  if(comm.user.username === user){
+    closeBtn.addEventListener('click',()=>{
+      deleteComment(document.cookie, comm.id)
+      location.reload();
+    });
+    commentDisplay.appendChild(closeBtn);   
+  }
   commentList.appendChild(commentDisplay);
-
 }
 
 
@@ -22,19 +33,23 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const signupPassword = document.querySelector('#signup-password');
   const signupButton = document.querySelector('#signup-btn');
 
-  const commentButton = document.querySelector('#post-btn');
+  const commentButton = document.querySelector('#comment-btn');
 
   const postHeader = document.querySelector('.post-title');
   let postId = window.location.hash.slice(1);
   let post = JSON.parse(localStorage.getItem(postId));
 
   const postTitle = document.createElement('h1');
+  postTitle.className = "user-post-title";
   const postDescr = document.createElement('p');
+  postDescr.className = "post-desc";
   postTitle.innerText = `${post.user.username}: ${post.title}`;
   postDescr.innerText = post.description;
   postHeader.appendChild(postTitle);
   postHeader.appendChild(postDescr);
+
   getAllComments(postId).then(res =>{
+    console.log(cookieParser(document.cookie).username)
     res.forEach(element => {
       populateExistingComment(element)
     });
@@ -43,6 +58,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     signUp(signupEmail.value, signupPassword.value, signupUsername.value)
       .then(response => {
         handleSignupResponse(response);
+        location.reload();
       });
   })
 
@@ -68,6 +84,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         closeButton.click();
         errorMessage.innerText = "";
         successfulLogin();
+        location.reload();
 
       }
     })
@@ -82,7 +99,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const comm = {
       "text": comment
     }
-    console.log(comm + " " + document.cookie + " " +  postId);
     postComment(comm, document.cookie, postId).then(response => {
       return response.json();
     }).then(response => {

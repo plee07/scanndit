@@ -176,3 +176,13 @@ async function postComment(comment, auth, postId){
   })
   return response;
 }
+
+// delete comment
+async function deleteComment(auth, commentId){
+  let userAuth = cookieParser(auth);
+  let response = await fetch(`${API_ENDPOINT_BASE}comment/${commentId}`, {
+  method: "DELETE",
+  headers: buildHeader(userAuth.access_token)
+  })
+  return response;  
+}
