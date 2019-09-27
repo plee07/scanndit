@@ -1,5 +1,4 @@
-body.logged-out .login-signup-buttons {
-}
+
 body.logged-in .login-signup-buttons {
   display: none;
 }
@@ -29,6 +28,15 @@ h1{
     margin: 0 auto;
 }
 
+.logo {
+    width: 60%;
+    height: auto;
+}
+
+.u-custom{
+    margin-right: 100px;
+    font-size: 30px;
+}
 .user-post{
     width: 90%;
     height: auto;
