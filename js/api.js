@@ -37,7 +37,6 @@ async function callApiAndReturnResponseOrThrowError(path, method, access_token =
       console.log('getPostsByUser received a bad response. HANDLE THIS BETTER');
       throw Error(response.statusText);
     }
-    console.log(response);
     return response;
     }).then(function(response) {
       return response.json();
@@ -45,9 +44,15 @@ async function callApiAndReturnResponseOrThrowError(path, method, access_token =
     return response;
 }
 
+// get comments by user
+async function getCommentsByUser(access_token) {
+  let response = await callApiAndReturnResponseOrThrowError('user/comment', 'GET', access_token);
+  return response;
+}
+
 // get posts by user
 async function getPostsByUser(access_token) {
-  let response = await callApiAndReturnResponseOrThrowError('user/post/', 'GET', access_token);
+  let response = await callApiAndReturnResponseOrThrowError('user/post', 'GET', access_token);
   return response;
 }
 
