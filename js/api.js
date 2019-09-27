@@ -1,157 +1,5 @@
 const API_ENDPOINT_BASE = 'http://thesi.generalassemb.ly:8080/';
 
-function isLoggedIn() {
-  cookieObject = cookieParser(document.cookie);
-  return (typeof cookieObject.access_token != 'undefined');
-}
-
-function getCookie(name) {
-  var value = "; " + document.cookie;
-  var parts = value.split("; " + name + "=");
-  if (parts.length == 2) return parts.pop().split(";").shift();
-}
-
-function buildHeader(access_token = null) {
-  let header = {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-  }
-  if (access_token) { header.Authorization = 'Bearer ' + access_token }
-  return(header);
-}
-
-async function getPostsByUser(access_token) {
-  let response = await fetch(`${API_ENDPOINT_BASE}user/post/`, {
-    method: 'GET',
-    headers: buildHeader(access_token)
-  }).then(function (response) {
-    if (!response.ok) {
-      // TODO: HANDLE BAD RESPONSE BETTER
-      console.log('getPostsByUser received a bad response. HANDLE THIS BETTER');
-      throw Error(response.statusText);
-    }
-    return response;
-  }).then(function(response) {
-    return response.json();
-  }).catch(err => err);
-
-  return response;
-}
-
-async function getProfile(access_token) {
-  let response = await fetch(`${API_ENDPOINT_BASE}profile`, {
-    method: 'GET',
-    headers: buildHeader(access_token)
-  }).then(function (response) {
-    if (!response.ok) {
-      // TODO: HANDLE BAD RESPONSE BETTER
-      console.log('getProfile received a bad response. HANDLE THIS BETTER');
-      throw Error(response.statusText);
-    }
-    return response;
-  }).then(function(response) {
-    return response.json();
-  }).catch(err => err);
-
-  return response;
-}
-
-async function createOrUpdateProfile(access_token, altEmail, mobileNumber, address) {
-  let profileInfo = {
-    additionalEmail: altEmail,
-    mobile: mobileNumber,
-    address: address
-  };
-  let response = await fetch(`${API_ENDPOINT_BASE}profile`, {
-    method: 'POST',
-    headers: buildHeader(access_token),
-    body: JSON.stringify(profileInfo)
-  }).then(function (response) {
-    if (!response.ok) {
-      // TODO: HANDLE BAD RESPONSE BETTER
-      console.log('createOrUpdateProfile received a bad response. HANDLE THIS BETTER');
-      throw Error(response.statusText);
-    }
-    return response;
-  }).then(function(response) {
-    return response.json();
-  }).catch(err => err);
-
-  return response;
-}
-
-// Loading all posts
-async function getAllPosts()
-{
-  let response = await fetch(`${API_ENDPOINT_BASE}post/list`);
-  let data = await response.json()
-  return data;
-}
-
-// loading all comments based on comment id
-async function getAllComments(postId){
-  let response = await fetch(`${API_ENDPOINT_BASE}post/${postId}/comment`);
-  let data = await response.json();
-  return data;
-}
-
-
-async function signUp(email, password, username){
-  let user = {
-    email: email,
-    password: password,
-    username: username,
-  };
-
-  let response = await fetch(`${API_ENDPOINT_BASE}signup`, {
-    method: 'POST',
-    headers: buildHeader(),
-    body: JSON.stringify(user)
-  })
-    .then(function(response) {
-      if (!response.ok) {
-        // TODO: HANDLE BAD RESPONSE BETTER
-        console.log('Sign Up received a bad response. HANDLE THIS BETTER');
-        throw Error(response.statusText);
-      }
-      return response;
-    })
-    .then(function(response) {
-      return response.json();
-    })
-    .catch(err => err);
-
-  return response;
-}
-
-// Existing User Login
-async function loginUser(user){
-  let response = await fetch(`${API_ENDPOINT_BASE}login`, {
-    method: 'POST',
-    headers: buildHeader(),
-    body: JSON.stringify(user)
-})
-
-let token = await response.json();
-return token;
-}
-
-//create new Post
-async function createNewPost(userTitle, userDescr, auth){
-  let userAuth = cookieParser(auth);
-  let post = {
-    title: userTitle,
-    description: userDescr
-  }
-  let response = await fetch(`${API_ENDPOINT_BASE}post`,{
-    method: 'POST',
-    headers: buildHeader(userAuth.access_token),
-    body: JSON.stringify(post)
-  });
-  let res = await response.json();
-  return res;
-}
-
 // document.cookie parser
 // obtained from https://gist.github.com/rendro/525bbbf85e84fa9042c2
 function cookieParser(cookie){
@@ -167,22 +15,111 @@ function cookieParser(cookie){
   }, {});
 }
 
+function buildHeader(access_token = null) {
+  let header = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  }
+  if (access_token) { header.Authorization = 'Bearer ' + access_token }
+  return(header);
+}
+
+// Returns response as json, or returns an error object
+async function callApiAndReturnResponseOrThrowError(path, method, access_token = null, body = null) {
+  let fetchOptions = {
+    method: method,
+    headers: buildHeader(access_token),
+  };
+  if (body) { fetchOptions.body = body };
+  let response = await fetch(`${API_ENDPOINT_BASE}${path}`, fetchOptions).then(function (response) {
+    if (!response.ok) {
+      // TODO: HANDLE BAD RESPONSE BETTER
+      console.log('getPostsByUser received a bad response. HANDLE THIS BETTER');
+      throw Error(response.statusText);
+    }
+    console.log(response);
+    return response;
+    }).then(function(response) {
+      return response.json();
+    }).catch(err => err);
+    return response;
+}
+
+// get posts by user
+async function getPostsByUser(access_token) {
+  let response = await callApiAndReturnResponseOrThrowError('user/post/', 'GET', access_token);
+  return response;
+}
+
+// get profile
+async function getProfile(access_token) {
+  let response = await callApiAndReturnResponseOrThrowError('profile', 'GET', access_token);
+  return response;
+}
+
+// creates or updates profile
+async function createOrUpdateProfile(access_token, altEmail, mobileNumber, address) {
+  let profileInfo = {
+    additionalEmail: altEmail,
+    mobile: mobileNumber,
+    address: address
+  };
+  let response = await callApiAndReturnResponseOrThrowError('profile', 'POST', access_token, JSON.stringify(profileInfo));
+
+  return response;
+}
+
+// Loading all posts
+async function getAllPosts()
+{
+  let response = await callApiAndReturnResponseOrThrowError('post/list', 'GET');
+  return response;
+}
+
+// loading all comments based on comment id
+async function getAllComments(postId){
+  let response = await callApiAndReturnResponseOrThrowError(`post/${postId}/comment`, 'GET');
+  return response;
+}
+
+// new user sign up
+async function signUp(email, password, username){
+  let user = {
+    email: email,
+    password: password,
+    username: username,
+  };
+  let response = await callApiAndReturnResponseOrThrowError('signup', 'POST', null, JSON.stringify(user));
+  return response;
+}
+
+// Existing User Login
+async function loginUser(user){
+  let response = await callApiAndReturnResponseOrThrowError('login', 'POST', null, JSON.stringify(user));
+  return response;
+}
+
+//create new Post
+async function createNewPost(userTitle, userDescr, auth){
+  let userAuth = cookieParser(auth);
+  let post = {
+    title: userTitle,
+    description: userDescr
+  }
+  let response = await callApiAndReturnResponseOrThrowError('post', 'POST', userAuth.access_token, JSON.stringify(post));
+  return response;
+}
+
+// post a comment
 async function postComment(comment, auth, postId){
   let userAuth = cookieParser(auth);
-  let response = await fetch(`${API_ENDPOINT_BASE}comment/${postId}`, {
-  method: "POST",
-  headers: buildHeader(userAuth.access_token),
-  body: JSON.stringify(comment)
-  })
+  let response = await callApiAndReturnResponseOrThrowError(`comment/${postId}`, 'POST', userAuth.access_token, JSON.stringify(comment));
   return response;
 }
 
 // delete comment
 async function deleteComment(auth, commentId){
   let userAuth = cookieParser(auth);
-  let response = await fetch(`${API_ENDPOINT_BASE}comment/${commentId}`, {
-  method: "DELETE",
-  headers: buildHeader(userAuth.access_token)
-  })
-  return response;  
+  let response = await callApiAndReturnResponseOrThrowError(`comment/${commentId}`, 'DELETE', userAuth.access_token);
+  return response;
 }

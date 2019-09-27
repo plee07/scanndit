@@ -102,8 +102,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
       "text": comment
     }
     postComment(comm, document.cookie, postId).then(response => {
-      return response.json();
-    }).then(response => {
       location.reload();
     })
   })

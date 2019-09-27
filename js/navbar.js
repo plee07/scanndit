@@ -1,3 +1,8 @@
+function isLoggedIn() {
+  cookieObject = cookieParser(document.cookie);
+  return (typeof cookieObject.access_token != 'undefined');
+}
+
 function login(user) {
   document.cookie = `access_token=${user.token}; path=/`;
   document.cookie = `username=${user.username}; path=/`;
