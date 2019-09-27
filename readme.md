@@ -12,12 +12,12 @@
 
 **A couple of paragraphs about the general approach you took.**
 
-> We started this project with a focus on modulaization and DRY principle. We took a pair programming and individual approach. Initially we started off by buidling the general template layout and file structure of the project together, then divided up the work based on user stories. In order to keep us working together we tackled different user stories from the same feature. This allowed us to work independently on a story but also forced us to have frequent meetings where we shared, discussed, and refactored our code into reusable functions due to working on the same feature. 
+> We started this project with a focus on modulaization and DRY principle. We took a pair programming and individual approach. Initially we started off by buidling the general template layout and file structure of the project together, then divided up the work based on user stories. In order to keep us working together we tackled different user stories from the same feature. This allowed us to work independently on a story but also forced us to have frequent meetings where we shared, discussed, and refactored our code into reusable components.
 
 
 **Descriptions of any unsolved problems or major hurdles you had to overcome.**
 
-> We've come across various bugs as we were navigating around our websites but we were able to troubleshoot. The major problem we faced was around maintaining the sstate of the user
+> We've come across various bugs as we were navigating around our websites but we were able to troubleshoot. The major problem we faced was around maintaining the state of the user
 
 **A link to your planning documentation for how you broke down this project with deliverables and timelines.**
 
@@ -29,8 +29,9 @@
 
 **A link to your user stories — who your users are, what they want, and why.**
 
-Our user base is your average everyday person who seeks a platform to express their highly important opinion and thoughts. In this day and age, a user is typically very busy and don't have the time to learn how to use a product. Therefore, we approached our web app with a minimialist mindset and kept everything as simple and intutive as possible.
+> Our user base is your average everyday person who seeks a platform to express their highly important and valued opinion and thoughts. In this day and age, a user is typically busy and do not have the time to learn how to use a product. Therefore, we approached our web app with a minimialist mindset and kept everything as simple and intutive to use without any prior knowledge.
 
 **A link to your wireframes — sketches of major views or interfaces in your application.**
 
+> Note: This is our original wire frame and our final design has changed slighthly.
 ![](Scanndit_Wire_Frame.png)
