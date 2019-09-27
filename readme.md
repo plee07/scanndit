@@ -12,7 +12,7 @@
 
 **A couple of paragraphs about the general approach you took.**
 
-> We started this project with a focus on modulaization and DRY principle. We took both a pair programming and individual approach. Initially we started off by buidling the general structure of the project together, then divided up the work based on user stories. In order to keep us working together we didn't divide the work by features but by user stories on the same feature. This allowed us to work independently but also forced us to have hourly meetings where we shared, discussed, and refactored our code into reusable functions.   
+> We started this project with a focus on modulaization and DRY principle. We took a pair programming and individual approach. Initially we started off by buidling the general template layout and file structure of the project together, then divided up the work based on user stories. In order to keep us working together we tackled different user stories from the same feature. This allowed us to work independently on a story but also forced us to have frequent meetings where we shared, discussed, and refactored our code into reusable functions due to working on the same feature. 
 
 
 **Descriptions of any unsolved problems or major hurdles you had to overcome.**
