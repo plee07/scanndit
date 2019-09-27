@@ -4,7 +4,8 @@ body.logged-in .login-signup-buttons {
   display: none;
 }
 
-body.logged-in .create-new-post {
+body.logged-out .create-new-comment {
+    display: none
 }
 body.logged-out .create-new-post {
   display: none

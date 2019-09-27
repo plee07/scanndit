@@ -67,8 +67,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         errorMessage.hidden = true;
         closeButton.click();
         errorMessage.innerText = "";
-        document.querySelector('.create-new-post').hidden = false;
-        document.querySelector('.login-signup-buttons').hidden = true;
+        successfulLogin();
 
       }
     })

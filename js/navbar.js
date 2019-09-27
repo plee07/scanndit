@@ -1,7 +1,7 @@
 function successfulLogin() {
   document.body.classList.add('logged-in');
   document.body.classList.remove('logged-out');
-  document.querySelector('#dropdown-username').innerText = getCookie('username');
+  document.querySelector('#dropdown-username').innerText = cookieParser(document.cookie).username;
   document.querySelector('#navbar-profile').hidden = false;
 }
 
