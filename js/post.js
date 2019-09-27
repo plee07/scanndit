@@ -6,13 +6,17 @@ function populateExistingComment(comm){
   const closeBtn = document.createElement("button");
   closeBtn.innerText = "X";
   
-  commentDisplay.className = 'user-comment'
+  commentDisplay.className = 'user-post';
+  console.log(comm)
   commentDisplay.innerText = `${comm.user.username}: ${comm.text}`;
   // commentDisplay.setAttribute('data-post-id', post.id);
   console.log(comm.user.username + " " + user);
   if(comm.user.username === user){
+    closeBtn.addEventListener('click',()=>{
+      deleteComment(document.cookie, comm.id)
+      location.reload();
+    });
     commentDisplay.appendChild(closeBtn);   
-    console.log("SAME")
   }
   commentList.appendChild(commentDisplay);
 }
