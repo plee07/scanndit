@@ -21,7 +21,7 @@
 
 **A link to your planning documentation for how you broke down this project with deliverables and timelines.**
 
-> Refer to the pivotal-tracker for a list of all the features built as well as we were planning on building
+> Refer to the pivotal-tracker for a list of all the features we have built. We used pivotal-tracker to assign tasks to each individual and to mark as complete.
 
 **Installation instructions for any dependencies.**
 
@@ -29,6 +29,8 @@
 
 **A link to your user stories — who your users are, what they want, and why.**
 
-
+Our user base is the average everyday person who seeks a platform. As a user, we want a web app that is intiutive to use and therefore we kept our design simple and intuitive.
 
 **A link to your wireframes — sketches of major views or interfaces in your application.**
+
+![](Scanndit_Wire_Frame.png)
