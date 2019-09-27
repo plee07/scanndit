@@ -1,11 +1,5 @@
 const POSTS_PER_PAGE = 25;
 
-function handleSignupResponse(signupResponse) {
-  let user = { token: signupResponse.token, username: signupResponse.username };
-  login(user);
-  $('#signupModal').modal('hide');
-}
-
 function postClick(event) {
   console.log(this.dataset.postId);
 }

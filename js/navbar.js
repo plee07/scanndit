@@ -1,3 +1,10 @@
+function handleSignupResponse(signupResponse) {
+  let user = { token: signupResponse.token, username: signupResponse.username };
+  login(user);
+  $('#signupModal').modal('hide');
+}
+
+
 function isLoggedIn() {
   cookieObject = cookieParser(document.cookie);
   return (typeof cookieObject.access_token != 'undefined');
