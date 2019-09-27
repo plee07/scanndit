@@ -51,7 +51,7 @@ window.addEventListener('DOMContentLoaded', function () {
     console.log("alsdhjfajelkfjalksjflkjaelkjflkajselfkjalekjflaejflajselfjalsekjflkasjelkfj");
     console.log(document.cookie);
     console.log("alsdhjfajelkfjalksjflkjaelkjflkajselfkjalekjflaejflajselfjalsekjflkasjelkfj");
-    ["/","/profile/","/post/"].forEach((el) => {
+    ["/post","/profile/","/"].forEach((el) => {
       document.cookie = `access_token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; path=${el}`;
       document.cookie = `username= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; path=${el}`;
     })

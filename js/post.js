@@ -22,7 +22,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const signupPassword = document.querySelector('#signup-password');
   const signupButton = document.querySelector('#signup-btn');
 
-  const commentButton = document.querySelector('#post-btn');
+  const commentButton = document.querySelector('#comment-btn');
 
   const postHeader = document.querySelector('.post-title');
   let postId = window.location.hash.slice(1);
@@ -34,6 +34,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   postDescr.innerText = post.description;
   postHeader.appendChild(postTitle);
   postHeader.appendChild(postDescr);
+
   getAllComments(postId).then(res =>{
     res.forEach(element => {
       populateExistingComment(element)
@@ -82,7 +83,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const comm = {
       "text": comment
     }
-    console.log(comm + " " + document.cookie + " " +  postId);
     postComment(comm, document.cookie, postId).then(response => {
       return response.json();
     }).then(response => {
