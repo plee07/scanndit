@@ -1,3 +1,10 @@
+function login(user) {
+  document.cookie = `access_token=${user.token}; path=/`;
+  document.cookie = `username=${user.username}; path=/`;
+  console.log(`${user.username} has logged in...`);
+  successfulLogin();
+}
+
 function successfulLogin() {
   document.body.classList.add('logged-in');
   document.body.classList.remove('logged-out');
@@ -6,6 +13,8 @@ function successfulLogin() {
 }
 
 function logout() {
+  document.cookie = `access_token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+  document.cookie = `username= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
   document.body.classList.add('logged-out');
   document.body.classList.remove('logged-in');
   document.querySelector('#dropdown-username').innerText = '';
@@ -48,16 +57,6 @@ window.addEventListener('DOMContentLoaded', function () {
   // ^ CHECK LOGIN STATE
 
   logoutButton.addEventListener('click', function () {
-    console.log("alsdhjfajelkfjalksjflkjaelkjflkajselfkjalekjflaejflajselfjalsekjflkasjelkfj");
-    console.log(document.cookie);
-    console.log("alsdhjfajelkfjalksjflkjaelkjflkajselfkjalekjflaejflajselfjalsekjflkasjelkfj");
-    ["/","/profile/","/post/"].forEach((el) => {
-      document.cookie = `access_token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; path=${el}`;
-      document.cookie = `username= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; path=${el}`;
-    })
-    console.log("alsdhjfajelkfjalksjflkjaelkjflkajselfkjalekjflaejflajselfjalsekjflkasjelkfj");
-    console.log(document.cookie);
-    console.log("alsdhjfajelkfjalksjflkjaelkjflkajselfkjalekjflaejflajselfjalsekjflkasjelkfj");
     logout();
     window.location.href = "/";
   });

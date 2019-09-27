@@ -62,8 +62,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
       }
       else{
-        document.cookie = `access_token=${response.token}`;
-        document.cookie = `username=${response.username}`;
+        let user = { token: response.token, username: response.username };
+        login(user);
         errorMessage.hidden = true;
         closeButton.click();
         errorMessage.innerText = "";

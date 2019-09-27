@@ -1,11 +1,8 @@
 const POSTS_PER_PAGE = 25;
 
 function handleSignupResponse(signupResponse) {
-  console.log(signupResponse);
-  document.cookie = `access_token=${signupResponse.token}`;
-  document.cookie = `username=${signupResponse.username}`;
-  console.log(`${signupResponse.username} has logged in...`);
-  successfulLogin();
+  let user = { token: signupResponse.token, username: signupResponse.username };
+  login(user);
   $('#signupModal').modal('hide');
 }
 
@@ -104,9 +101,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
       }
       else{
-        document.cookie = `access_token=${response.token}`;
-        document.cookie = `username=${response.username}`;
-        // console.log(response.token);
+        let user = { token: response.token, username: response.username };
+        login(user);
         errorMessage.hidden = true;
         closeButton.click();
         errorMessage.innerText = "";
