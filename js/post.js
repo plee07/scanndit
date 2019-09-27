@@ -6,17 +6,19 @@ function populateExistingComment(comm){
   const closeBtn = document.createElement("button");
   closeBtn.className = "close-button";
   closeBtn.innerText = "X";
-  
+
   commentDisplay.className = 'user-post';
   console.log(comm)
   commentDisplay.innerText = `${comm.user.username}: ${comm.text}`;
   console.log(comm.user.username + " " + user);
   if(comm.user.username === user){
     closeBtn.addEventListener('click',()=>{
-      deleteComment(document.cookie, comm.id)
-      location.reload();
+      deleteComment(document.cookie, comm.id).then(response => {
+        console.log(response);
+        location.reload();
+      })
     });
-    commentDisplay.appendChild(closeBtn);   
+    commentDisplay.appendChild(closeBtn);
   }
   commentList.appendChild(commentDisplay);
 }
