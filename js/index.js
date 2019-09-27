@@ -16,7 +16,8 @@ function postSetUp(post){
   postDisplay.className = 'user-post';
   postDisplay.innerText = `${post.user.username}: ${post.title}`;
   postDisplay.setAttribute('data-post-id', post.id);
-  postDisplay.addEventListener('click', postClick);
+  postDisplay.addEventListener('click', 
+  postClick);
   link.appendChild(postDisplay);
   localStorage.setItem(post.id, JSON.stringify(post));
   sessionStorage.setItem('current-user', post.user.username)
