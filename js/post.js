@@ -4,12 +4,12 @@ function populateExistingComment(comm){
   const commentList = document.querySelector('.all-comments');
   const commentDisplay = document.createElement('div');
   const closeBtn = document.createElement("button");
+  closeBtn.className = "close-button";
   closeBtn.innerText = "X";
   
   commentDisplay.className = 'user-post';
   console.log(comm)
   commentDisplay.innerText = `${comm.user.username}: ${comm.text}`;
-  // commentDisplay.setAttribute('data-post-id', post.id);
   console.log(comm.user.username + " " + user);
   if(comm.user.username === user){
     closeBtn.addEventListener('click',()=>{
@@ -40,7 +40,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
   let post = JSON.parse(localStorage.getItem(postId));
 
   const postTitle = document.createElement('h1');
+  postTitle.className = "user-post-title";
   const postDescr = document.createElement('p');
+  postDescr.className = "post-desc";
   postTitle.innerText = `${post.user.username}: ${post.title}`;
   postDescr.innerText = post.description;
   postHeader.appendChild(postTitle);
