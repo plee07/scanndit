@@ -1,3 +1,25 @@
+function onviewUserPostsClick() {
+  let viewUserPostsButton = document.querySelector('#view-user-posts-button');
+  let viewUserCommentsButton = document.querySelector('#view-user-comments-button');
+  let postList = document.querySelector('.post-list');
+  let commentsList = document.querySelector('.comments-list');
+  viewUserPostsButton.disabled = true;
+  viewUserCommentsButton.disabled = false;
+  postList.hidden = false;
+  commentsList.hidden = true;
+}
+
+function onviewUserCommentsClick() {
+  let viewUserPostsButton = document.querySelector('#view-user-posts-button');
+  let viewUserCommentsButton = document.querySelector('#view-user-comments-button');
+  let postList = document.querySelector('.post-list');
+  let commentsList = document.querySelector('.comments-list');
+  viewUserPostsButton.disabled = false;
+  viewUserCommentsButton.disabled = true;
+  postList.hidden = true;
+  commentsList.hidden = false;
+}
+
 function getCookie(name) {
   var value = "; " + document.cookie;
   var parts = value.split("; " + name + "=");
@@ -126,6 +148,12 @@ window.addEventListener('DOMContentLoaded', function () {
   let mobileNumberInput = document.querySelector('.profile-mobile-number');
   let addressInput = document.querySelector('.profile-address');
 
+  let viewUserPostsButton = document.querySelector('#view-user-posts-button');
+  let viewUserCommentsButton = document.querySelector('#view-user-comments-button');
+
+  viewUserPostsButton.addEventListener('click', onviewUserPostsClick);
+  viewUserCommentsButton.addEventListener('click', onviewUserCommentsClick);
+
   // console.log(document.querySelectorAll('.profile-user-info-field'));
   document.querySelectorAll('.profile-user-info-field').forEach(function(el) {
     el.addEventListener('click', function() {
@@ -160,12 +188,26 @@ window.addEventListener('DOMContentLoaded', function () {
     saveProfile(altEmailInput.value, mobileNumberInput.value, addressInput.value);
   });
 
+  window.pagesDisplayed = 0;
   let access_token = getCookie("access_token");
   if (typeof(access_token) == "string") {
     getProfile(access_token).then(response => {
       handleProfileResponse(response);
     });
+    // Get first page of posts and append to all-posts div
+    getPostsByUser(access_token)
+      .then(data => appendToHomepageFeed(data, window.pagesDisplayed + 1));
+    getCommentsByUser(access_token)
+      .then(data => console.log(data) );
   } else {
     console.log("we need to redirect to signup");
   }
+
+  getCommentsByUser(access_token).then(res =>{
+    console.log(cookieParser(document.cookie).username)
+    res.forEach(element => {
+      populateExistingComment(element, true)
+    });
+  });
+
 });

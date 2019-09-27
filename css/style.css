@@ -1,4 +1,3 @@
-
 body.logged-in .login-signup-buttons {
   display: none;
 }
@@ -8,6 +7,11 @@ body.logged-out .create-new-comment {
 }
 body.logged-out .create-new-post {
   display: none
+}
+
+.comment-and-post {
+  background: lightgreen;
+  margin-bottom: 20px;
 }
 
 #main-container {
