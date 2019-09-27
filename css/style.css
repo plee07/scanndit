@@ -49,6 +49,7 @@ p {
     margin: 0px;
     opacity: 0.3;
     color: red;
+    border-radius: 25px;
 }
 
 .close-button:hover {
@@ -59,7 +60,8 @@ p {
     width: 90%;
     height: auto;
     border: 2px solid lightgrey;
-    margin: 5px;
+    border-radius: 25px;
+    margin: 10px;
     display: inline-block;
     padding-left: 20px
 }
@@ -72,7 +74,8 @@ p {
     width: 90%;
     height: auto;
     border: 2px solid lightgrey;
-    margin: 5px;
+    border-radius: 25px;
+    margin: 10px;
     display: inline-block;
     padding-left: 20px;
     color:#0288d1;
@@ -85,7 +88,8 @@ p {
 
 .login-setting{
     border-radius: 25px;
-    margin: 5px;
+    margin: 10px;
+    padding: 2px;
 }
 
 .create-post-wrapper{
@@ -106,6 +110,7 @@ button {
 #load-more-button{
     text-align: center;
     width: 91%;
+    border-radius: 25px;
     margin: 0 auto;
 }
 
