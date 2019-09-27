@@ -1,13 +1,20 @@
 
 function populateExistingComment(comm){
-  console.log(comm)
+  const user = cookieParser(document.cookie).username;
   const commentList = document.querySelector('.all-comments');
-  const commentDisplay = document.createElement('div');;
+  const commentDisplay = document.createElement('div');
+  const closeBtn = document.createElement("button");
+  closeBtn.innerText = "X";
+  
   commentDisplay.className = 'user-comment'
   commentDisplay.innerText = `${comm.user.username}: ${comm.text}`;
   // commentDisplay.setAttribute('data-post-id', post.id);
+  console.log(comm.user.username + " " + user);
+  if(comm.user.username === user){
+    commentDisplay.appendChild(closeBtn);   
+    console.log("SAME")
+  }
   commentList.appendChild(commentDisplay);
-
 }
 
 
@@ -36,6 +43,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   postHeader.appendChild(postDescr);
 
   getAllComments(postId).then(res =>{
+    console.log(cookieParser(document.cookie).username)
     res.forEach(element => {
       populateExistingComment(element)
     });
@@ -44,6 +52,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     signUp(signupEmail.value, signupPassword.value, signupUsername.value)
       .then(response => {
         handleSignupResponse(response);
+        location.reload();
       });
   })
 
@@ -69,6 +78,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         closeButton.click();
         errorMessage.innerText = "";
         successfulLogin();
+        location.reload();
 
       }
     })
