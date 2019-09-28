@@ -80,8 +80,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
   document.querySelector('#cancel-and-collapse-button').addEventListener('click', (e) => {
     postSubmissionTitle.value = '';
     postSubmissionBody.value = '';
-    postwidget.classList.remove('expanded');
+    document.querySelector('.post-widget-submission-box').style.visibility = 'hidden';
     postwidget.classList.add('collapsed');
+    postwidget.classList.remove('expanded');
   });
   document.querySelector('#submit-post-button').addEventListener('click',()=>{
     createNewPost(postSubmissionTitle.value, postSubmissionBody.value, document.cookie).then(res => {
