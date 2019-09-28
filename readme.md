@@ -18,16 +18,21 @@
 
 **Descriptions of any unsolved problems or major hurdles you had to overcome.**
 
-> 
+> **Delete Post** - unable to call the 'delete post by id' API (Unsolved)\
+
+> **Transfering post details between pages** - When a user clicks on a post he will be directed to a comments page where a 'get comments by Post Id" will called.
+
+> Managing user login state - One of the difficulty the team faced early on was maintaining a user's login state as they navigate to the different pages.
+
 
 **A link to your planning documentation for how you broke down this project with deliverables and timelines.**
 
-> **Goals**
-    **9/24** - User Stories and Wire frame
-    **9/25** - Landing page (view all post), Comments page, Login/Sign-up
-    **9/26** - Navigation menu, Profile Page, Delete posts/comments 
-    **9/27** - Unit Testing, Styling updates, Extra features
-    **9/28** - Unit Testing, Styling updates, Extra features
+> **Goals**\
+    **9/24** - User Stories,Wire frame, Set up enviornment and file structure\
+    **9/25** - Landing page (view all post), Comments page, Login/Sign-up\
+    **9/26** - Navigation menu, Profile Page, Delete posts/comments \
+    **9/27** - Unit Testing, Styling updates, Extra features\
+    **9/28** - Unit Testing, Styling updates, Extra features\
 
 **Installation instructions for any dependencies.**
 
@@ -35,7 +40,9 @@
 
 **A link to your user stories — who your users are, what they want, and why.**
 
-> Our user base is your average everyday person who seeks a platform to communicate with others worldwide. A user is typically busy and do not have the time to learn how to use a product. Therefore, a minimalist approach was taken and the UI was built to be intutive for users with no prior knowledge of the app.
+> Our user base is your average everyday person who seeks a platform to communicate with others worldwide. A user is typically busy and do not have the time to learn how to use a product. Therefore, a minimalist approach was taken and the UI was built to be intutive for those with no prior knowledge of the app.\
+
+>Scandit User Stories - https://www.pivotaltracker.com/n/projects/2400268
 
 **A link to your wireframes — sketches of major views or interfaces in your application.**
 
