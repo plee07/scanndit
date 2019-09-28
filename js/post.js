@@ -3,7 +3,7 @@
 window.addEventListener('DOMContentLoaded', (event) => {
   let postId = window.location.hash.slice(1);
   let post = JSON.parse(localStorage.getItem(postId));
-  localStorage.removeItem(postId);
+  // localStorage.removeItem(postId);
   const closeButton = document.querySelector('#close-btn');
   const userLogin = document.querySelector('#user-login');
   const userPassword = document.querySelector('#user-password');
