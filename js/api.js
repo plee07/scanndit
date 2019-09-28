@@ -34,7 +34,7 @@ async function callApiAndReturnResponseOrThrowError(path, method, access_token =
   let response = await fetch(`${API_ENDPOINT_BASE}${path}`, fetchOptions).then(function (response) {
     if (!response.ok) {
       // TODO: HANDLE BAD RESPONSE BETTER
-      console.log('getPostsByUser received a bad response. HANDLE THIS BETTER');
+      console.log(`${method} to ${path} received a bad response. HANDLE THIS BETTER`);
       throw Error(response.statusText);
     }
     return response;

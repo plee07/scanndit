@@ -121,9 +121,14 @@ function handleProfileResponse(profileResponse) {
     let access_token = getCookie("access_token");
     if (typeof(access_token) == "string") {
       getPostsByUser(access_token).then(response => {
-        // if that works, show create profile buttons
-        document.querySelector('.profile-username').innerText = getCookie('username');
-        displayButtons('create');
+        if (response.name == "Error") {
+          logout();
+          window.location.href = "/";
+        } else {
+          // if that works, show create profile buttons
+          document.querySelector('.profile-username').innerText = getCookie('username');
+          displayButtons('create');
+        }
       });
     } else {
       // if it doesn't, prompt to log in

@@ -1,9 +1,21 @@
+body.logged-out .navbar-toggler {
+  display: none
+}
+
+body.logged-in .post-widget-logged-out-buttons {
+  display: none;
+}
+
+body.logged-out .post-widget-logged-in-buttons {
+  display: none
+}
+
 body.logged-in .login-signup-buttons {
   display: none;
 }
 
 body.logged-out .create-new-comment {
-    display: none
+  display: none
 }
 body.logged-out .create-new-post {
   display: none
@@ -14,17 +26,15 @@ body.logged-out .create-new-post {
   margin-bottom: 20px;
 }
 
-#main-container {
-  padding: 20px;
-  margin: auto;
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 992px;
+#navbar-login button {
+  margin-left: 10px;
+  width: 6em;
 }
 
 .main-container {
   padding: 20px;
   margin: auto;
+  margin-top: 57px;
   box-sizing: border-box;
   width: 100%;
   max-width: 992px;
@@ -36,10 +46,6 @@ h1{
 
 p {
     color: #006db3;
-}
-
-.dropdown {
-  float: right;
 }
 
 .post-list {
@@ -56,19 +62,21 @@ p {
   width: 32px;
   height: 32px;
   position: relative;
-  top: -3px;
+  top: -1px;
 }
 
 .navbar-logo-text {
   margin-left: 10px;
-  font-size: 24px;
+  font-size: 20px;
 }
 .u-custom{
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .navbar-custom {
-  padding: 0 10px;;
+  padding: 5px 15px;
+  /* height: 49px; */
+  border-bottom: 1px solid lightgrey;
 }
 
 .close-button {
