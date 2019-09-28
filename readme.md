@@ -18,7 +18,7 @@
 
 **Descriptions of any unsolved problems or major hurdles you had to overcome.**
 
-> We've come across various bugs as we were navigating around our websites but we were able to troubleshoot. The major problem we faced was around maintaining the state of the user
+> 
 
 **A link to your planning documentation for how you broke down this project with deliverables and timelines.**
 
@@ -35,7 +35,7 @@
 
 **A link to your user stories — who your users are, what they want, and why.**
 
-> Our user base is your average everyday person who seeks a platform to communicate with others worldwide. A user is typically busy and do not have the time to learn how to use a product. Therefore, we approached our web app with a minimialist mindset and kept everything as simple and intutive to use without any prior knowledge.
+> Our user base is your average everyday person who seeks a platform to communicate with others worldwide. A user is typically busy and do not have the time to learn how to use a product. Therefore, a minimalist approach was taken and the UI was built to be intutive for users with no prior knowledge of the app.
 
 **A link to your wireframes — sketches of major views or interfaces in your application.**
 
