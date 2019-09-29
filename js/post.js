@@ -2,7 +2,7 @@
 
 window.addEventListener('DOMContentLoaded', (event) => {
   let postId = window.location.hash.slice(1);
-  let post = JSON.parse(sessionStorage.getItem(postId));
+  let post = JSON.parse(localStorage.getItem(postId));
   // localStorage.removeItem(postId);
   const closeButton = document.querySelector('#close-btn');
   const userLogin = document.querySelector('#user-login');
@@ -22,6 +22,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   postTitle.className = "user-post-title";
   const postDescr = document.createElement('p');
   postDescr.className = "post-desc";
+  console.log(post)
   postTitle.innerText = `${post.user.username}: ${post.title}`;
   postDescr.innerText = post.description;
   postHeader.appendChild(postTitle);

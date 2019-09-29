@@ -24,7 +24,7 @@ function postSetUp(post){
     postDisplay.appendChild(closeBtn);
   }
   link.appendChild(postDisplay);
-  sessionStorage.setItem(post.id, JSON.stringify(post));
+  localStorage.setItem(post.id, JSON.stringify(post));
   // sessionStorage.setItem('current-user', post.user.username)
   return link;
 }
