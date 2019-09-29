@@ -31,6 +31,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     signUp(signupEmail.value, signupPassword.value, signupUsername.value)
       .then(response => {
         handleSignupResponse(response);
+        // window.location.href += `#${postId}`;
         location.reload();
       });
   })
@@ -57,6 +58,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         closeButton.click();
         errorMessage.innerText = "";
         successfulLogin();
+        // window.location.href += `#${postId}`;
         location.reload();
 
       }
