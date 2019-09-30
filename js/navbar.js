@@ -130,6 +130,10 @@ window.addEventListener('DOMContentLoaded', function () {
     logout();
     if (window.location.pathname == '/profile/') {
       window.location.href = "/";
+      location.reload();
+    }
+    else{
+      location.reload();
     }
   });
 
