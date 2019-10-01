@@ -3,7 +3,7 @@
 window.addEventListener('DOMContentLoaded', (event) => {
   let postId = window.location.hash.slice(1);
   let post = JSON.parse(localStorage.getItem(postId));
-
+  // localStorage.removeItem(postId);
   const closeButton = document.querySelector('#close-btn');
   const userLogin = document.querySelector('#user-login');
   const userPassword = document.querySelector('#user-password');
@@ -22,6 +22,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   postTitle.className = "user-post-title";
   const postDescr = document.createElement('p');
   postDescr.className = "post-desc";
+  console.log(post)
   postTitle.innerText = `${post.user.username}: ${post.title}`;
   postDescr.innerText = post.description;
   postHeader.appendChild(postTitle);
@@ -31,6 +32,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     signUp(signupEmail.value, signupPassword.value, signupUsername.value)
       .then(response => {
         handleSignupResponse(response);
+        // window.location.href += `#${postId}`;
         location.reload();
       });
   })
@@ -57,6 +59,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         closeButton.click();
         errorMessage.innerText = "";
         successfulLogin();
+        // window.location.href += `#${postId}`;
         location.reload();
 
       }
@@ -73,6 +76,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
       "text": comment
     }
     postComment(comm, document.cookie, postId).then(response => {
+      console.log("TEST")
       location.reload();
     })
   })

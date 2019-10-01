@@ -66,14 +66,33 @@ window.addEventListener('DOMContentLoaded', (event) => {
   //Close out of login modal
   closeButton.addEventListener('click',()=> document.querySelector('.error-message').hidden = true);
 
-  // User Create Posts
-  postButton.addEventListener('click',()=>{
-    createNewPost(postTitle.value, postText.value, document.cookie).then(res => {
+
+  // Create posts from post widget
+  let postwidget = document.querySelector('.post-widget');
+  let postWidgetExpandButton = document.querySelector('#post-widget-collaped-logged-in-button');
+  postWidgetExpandButton.addEventListener('click', (e) => {
+    postwidget.classList.remove('collapsed');
+    postwidget.classList.add('expanded');
+  });
+  let submitPostButton = document.querySelector('#submit-post-button');
+  let postSubmissionTitle = document.querySelector('.post-submission-title');
+  let postSubmissionBody = document.querySelector('.post-submission-body');
+  document.querySelector('#cancel-and-collapse-button').addEventListener('click', (e) => {
+    postSubmissionTitle.value = '';
+    postSubmissionBody.value = '';
+    document.querySelector('.post-widget-submission-box').style.visibility = 'hidden';
+    postwidget.classList.add('collapsed');
+    postwidget.classList.remove('expanded');
+  });
+  document.querySelector('#submit-post-button').addEventListener('click',()=>{
+    createNewPost(postSubmissionTitle.value, postSubmissionBody.value, document.cookie).then(res => {
       let postFeed = document.querySelector('.all-posts');
       let postDisplay = postSetUp(res);
       postFeed.prepend(postDisplay);
-      $('#postModal').modal('hide');
-    })
+    }).then(res => {
+      postSubmissionTitle.value = '';
+      postSubmissionBody.value = '';
+    });
   })
 
   // Get first page of posts and append to all-posts div

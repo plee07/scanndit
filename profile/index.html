@@ -11,49 +11,52 @@
   </head>
   <body>
     <div id="main-container" class="main-container">
-      <div class="profile">
-        <div class="profile-photo">
-          <img src="/profile-placeholder.png" alt="">
-        </div>
-        <h1 class="profile-username"></h1>
+      <div class="profile-wrapper">
 
-        <div class="profile-user-info" hidden="true">
-          <div class="profile-user-info-field">
-            <span class="profile-field-label">Alternate Email</span>
-            <input class="profile-field profile-alt-email" type="text" name="" value="" disabled="disabled">
+        <div class="profile">
+          <div class="profile-photo">
+            <img src="/profile-placeholder.png" alt="">
           </div>
-          <div class="profile-user-info-field">
-            <span class="profile-field-label">Mobile Number</span>
-            <input class="profile-field profile-mobile-number" type="text" name="" value="" disabled="disabled">
+          <h1 class="profile-username"></h1>
+
+          <div class="profile-user-info" hidden="true">
+            <div class="profile-user-info-field">
+              <span class="profile-field-label">Alternate Email</span>
+              <input class="profile-field profile-alt-email" type="text" name="" value="" disabled="disabled">
+            </div>
+            <div class="profile-user-info-field">
+              <span class="profile-field-label">Mobile Number</span>
+              <input class="profile-field profile-mobile-number" type="text" name="" value="" disabled="disabled">
+            </div>
+            <div class="profile-user-info-field">
+              <span class="profile-field-label">Address</span>
+              <input class="profile-field profile-address" type="text" name="" value="" disabled="disabled">
+            </div>
           </div>
-          <div class="profile-user-info-field">
-            <span class="profile-field-label">Address</span>
-            <input class="profile-field profile-address" type="text" name="" value="" disabled="disabled">
+
+          <div class="profile-buttons-wrapper profile-create-button-wrapper" hidden="true">
+            <button class="profile-create-button btn btn-outline-primary" type="button" name="button">Create Profile</button>
           </div>
+          <div class="profile-buttons-wrapper profile-edit-button-wrapper" hidden="true">
+            <button class="profile-edit-button btn btn-outline-primary" type="button" name="button">Edit Profile</button>
+          </div>
+          <div class="profile-buttons-wrapper profile-save-cancel-button-wrapper" hidden="true">
+            <button class="profile-cancel-button btn btn-outline-primary" type="button" name="button">Cancel</button>
+            <button class="profile-save-button btn btn-outline-primary" type="button" name="button">Save</button>
+          </div>
+
         </div>
 
-        <div class="profile-buttons-wrapper profile-create-button-wrapper" hidden="true">
-          <button class="profile-create-button btn btn-outline-primary" type="button" name="button">Create Profile</button>
-        </div>
-        <div class="profile-buttons-wrapper profile-edit-button-wrapper" hidden="true">
-          <button class="profile-edit-button btn btn-outline-primary" type="button" name="button">Edit Profile</button>
-        </div>
-        <div class="profile-buttons-wrapper profile-save-cancel-button-wrapper" hidden="true">
-          <button class="profile-cancel-button btn btn-outline-primary" type="button" name="button">Cancel</button>
-          <button class="profile-save-button btn btn-outline-primary" type="button" name="button">Save</button>
+        <div class="user-posts-and-comments">
+          <div class="user-posts-and-comments-buttons">
+            <button id="view-user-posts-button" type="button" name="button" disabled>Posts</button>
+            <button id="view-user-comments-button" type="button" name="button">Comments</button>
+          </div>
+          <div class="post-list toggle-content is-visible"></div>
+          <div class="comments-list toggle-content"></div>
         </div>
 
       </div>
-
-      <div class="user-posts-and-comments">
-        <div class="user-posts-and-comments-buttons">
-          <button id="view-user-posts-button" type="button" name="button" disabled>Posts</button>
-          <button id="view-user-comments-button" type="button" name="button">Comments</button>
-        </div>
-        <div class="post-list toggle-content is-visible"></div>
-        <div class="comments-list toggle-content"></div>
-      </div>
-
     </div>
 
 

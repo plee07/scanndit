@@ -31,7 +31,7 @@ function getCookie(name) {
 }
 
 function handleSaveProfileResponse(profileResponse) {
-  if (profileResponse.name == "error") {
+  if (profileResponse.name == "Error") {
     // Notify user that their profile update was not actually saved
     // Might need to redirect them to some login thing
   } else if (typeof profileResponse.id == 'number') {
@@ -115,23 +115,11 @@ function displayButtons(buttonType) {
   }
 }
 
-function handleProfileResponse(profileResponse) {
+async function handleProfileResponse(profileResponse) {
   if (profileResponse.name == "Error") {
-    // test validity of access_token by trying to fetch this user's posts
-    let access_token = getCookie("access_token");
-    if (typeof(access_token) == "string") {
-      getPostsByUser(access_token).then(response => {
-        // if that works, show create profile buttons
-        document.querySelector('.profile-username').innerText = getCookie('username');
-        displayButtons('create');
-      });
-    } else {
-      // if it doesn't, prompt to log in
-      // redirect user to login/signup
-    }
+    displayButtons('create');
   } else if (typeof profileResponse.id == 'number') {
     // populate fields and show edit profile button
-    document.querySelector('.profile-username').innerText = getCookie('username');
     populateProfile(profileResponse.additionalEmail, profileResponse.mobile, profileResponse.address);
     let profileUserInfo = document.querySelector('.profile-user-info');
     displayButtons('edit');
@@ -141,8 +129,13 @@ function handleProfileResponse(profileResponse) {
     // dont expect to end up here, but...
     console.log('didnt expect to end up here, not sure whats happening');
   }
-  document.querySelector('.profile').removeAttribute('hidden');
+  return;
 }
+
+
+
+
+
 
 // ON DOM CONTENT LOADED
 window.addEventListener('DOMContentLoaded', function () {
@@ -197,22 +190,35 @@ window.addEventListener('DOMContentLoaded', function () {
 
   window.pagesDisplayed = 0;
   let access_token = getCookie("access_token");
+
+  // Fetch profile info or redirect to homepage
   if (typeof(access_token) == "string") {
+    document.querySelector('.profile-username').innerText = getCookie('username');
     getProfile(access_token).then(response => {
-      handleProfileResponse(response);
+      return handleProfileResponse(response);
+    }).then(() => {
+      let access_token = getCookie("access_token");
+      return getPostsByUser(access_token).then(response => {
+        if (response.name == "Error") {
+          logout();
+          window.location.href = "/";
+        }
+        return response;
+      });
+    }).then(response => {
+      if (response.name == "Error") {
+        console.log("got an error trying to get posts for user, perhaps the access_token is expired");
+      } else {
+        appendToHomepageFeed(response, window.pagesDisplayed + 1);
+      }
     });
-    // Get first page of posts and append to all-posts div
-    getPostsByUser(access_token)
-      .then(data => appendToHomepageFeed(data, window.pagesDisplayed + 1));
     getCommentsByUser(access_token).then(res =>{
-      console.log(cookieParser(document.cookie).username)
       res.forEach(element => {
         populateExistingComment(element, true)
       });
     });
   } else {
-    console.log("we need to redirect to signup");
+    window.location.href = '/';
   }
-
 
 });

@@ -33,7 +33,7 @@
   color: #999999;
   margin-bottom: 2px;
   border-bottom: 0px;
-  transition: margin-bottom, border-bottom 0.25s;
+  transition: margin-bottom 0.25s, border-bottom 0.25s;
 }
 
 .user-posts-and-comments-buttons button:disabled {
@@ -42,7 +42,7 @@
   color: #000000;
   margin-bottom: 0px;
   border-bottom: 2px solid black;
-  transition: margin-bottom, border-bottom 0.25s;
+  transition: margin-bottom 0.25s, border-bottom 0.25s;
 }
 
 

@@ -2,19 +2,30 @@ const POSTS_PER_PAGE = 25;
 
 // returns a div element of the post
 function postSetUp(post){
+  const user = cookieParser(document.cookie).username;
   let postDisplay = document.createElement('div');
   let link = document.createElement('a');
-  let closeButton = document.createElement('button');
-
-  closeButton.innerText = 'X';
-  closeButton.className = "close-btn";
+  const closeBtn = document.createElement("button");
+  closeBtn.className = "close-button";
+  closeBtn.classList.add('delete-comment-button');
+  closeBtn.innerText = "X";
+  
+  
   link.setAttribute("href", `/post/#${post.id}`);
   postDisplay.className = 'user-post';
   postDisplay.innerText = `${post.user.username}: ${post.title}`;
   postDisplay.setAttribute('data-post-id', post.id);
+  if(post.user.username === user){
+    console.log("AGREED")
+    closeBtn.addEventListener('click',(event)=>{
+      event.stopPropagation();
+      //delete post to go here
+    });
+    postDisplay.appendChild(closeBtn);
+  }
   link.appendChild(postDisplay);
   localStorage.setItem(post.id, JSON.stringify(post));
-  sessionStorage.setItem('current-user', post.user.username)
+  // sessionStorage.setItem('current-user', post.user.username)
   return link;
 }
 
