@@ -1,7 +1,7 @@
 
 # Scanndit
 
-**GA Project 1 - Readme**
+**GA Project 1**
 
 **Project Members: Davis Allen, Phil Lee, Carlos Kruger**
 
