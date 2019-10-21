@@ -3,7 +3,7 @@
 
 **GA Project 1 - Readme**
 
-**Project Members: Davis Allen, Phil Lee**
+**Project Members: Davis Allen, Phil Lee, Carlos Kruger**
 
 ---
 **What is Scanndit?**
