@@ -1,4 +1,5 @@
-const API_ENDPOINT_BASE = 'http://thesi.generalassemb.ly:8080/';
+// const API_ENDPOINT_BASE = 'http://thesi.generalassemb.ly:8080/';
+const API_ENDPOINT_BASE = 'http://localhost:8080/scandit/';
 
 // document.cookie parser
 // obtained from https://gist.github.com/rendro/525bbbf85e84fa9042c2
